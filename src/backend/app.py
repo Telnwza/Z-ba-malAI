@@ -33,10 +33,12 @@ def translate(req: TranslateRequest):
     - direction ("to_genz" | "to_normal", required): "to_genz" turns normal Thai into
       Gen Z slang; "to_normal" turns Gen Z slang back into normal Thai.
     - max_style_level (int 1-4, default 3): only use rules whose Style Level is at most this.
-    - allow_profanity (bool, default false): true also allows rules labelled Profanity/Insult.
-    - top_k (int 1-10, default 5): maximum number of entries returned in `candidates`.
+    - allow_profanity (bool, default false): true also allows rules labelled Profanity/Insult
+      and raises max_style_level to 4 (most profanity rules are level 4).
+    - top_k (int 1-10, default 5): maximum number of candidates per replaced word.
 
-    Response 200: {output, applied_rules, candidates} (field details in README).
+    Response 200: {output, applied_rules}; each entry has from, span, output_span and
+    candidates (field details in README).
     Invalid or out-of-range values return FastAPI's standard 422.
     """
     return translator.translate(

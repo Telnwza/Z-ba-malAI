@@ -5,6 +5,7 @@ Gen Z -> Normal: Gen Z word (Target / Variants) found in the sentence -> replace
 Overlapping rules: highest score wins, then the longer span, then the lower Style Level.
 """
 import re
+from typing import NamedTuple
 
 from pythainlp.corpus.common import thai_words
 from pythainlp.tokenize import Trie, word_tokenize
@@ -20,6 +21,28 @@ try:
 except ImportError:
     def score_rules(text):      # ยังไม่มี → ทุก rule ได้ 0 ระบบจะทำงานแบบ keyword match
         return []
+
+
+class Word(NamedTuple):
+    """A token of the sentence and its start offset in the text."""
+    text: str
+    start: int
+
+    @property
+    def end(self):
+        return self.start + len(self.text)
+
+
+class Proposal(NamedTuple):
+    """One possible replacement: text[start:end] -> replacement, suggested by rule."""
+    start: int
+    end: int
+    replacement: str
+    rule: Rule
+    score: float | None
+
+    def overlaps(self, other):
+        return self.start < other.end and other.start < self.end
 
 
 class Translator:
@@ -42,17 +65,28 @@ class Translator:
     def translate(self, text, direction, max_style_level=3, allow_profanity=False, top_k=5):
         """Translate text in the given direction ("to_genz" | "to_normal").
 
-        Returns a dict {output, applied_rules, candidates} per the POST /translate spec.
+        Returns a dict {output, applied_rules} per the POST /translate spec: one entry per replaced
+        word, each with its spans in text and output and up to top_k candidate translations.
         Rules are filtered by Style Level and Content Label first; overlaps are resolved by
-        score > longer span > lower Style Level (each rule applies at most once per sentence).
+        score > longer span > lower Style Level. A rule applies at most Max Apply times per
+        sentence in to_genz; to_normal replaces every occurrence.
         """
-        allowed = [r for r in self.rules if r.style_level <= max_style_level
-                   and (allow_profanity or r.content_label not in PROFANE)]
-        tokens = self._tokenize(text)
-        scores = {row[0]: float(row[1]) for row in self.scorer(text)}
+        if allow_profanity:
+            max_style_level = 4     # คำหยาบส่วนใหญ่อยู่ระดับ 4 ติ๊กแล้วต้องเห็นผล
+        rules = [r for r in self.rules if r.style_level <= max_style_level
+                 and (allow_profanity or r.content_label not in PROFANE)]
 
-        proposals = []  # (start, end, replacement, rule, score)
-        for r in allowed:
+        proposals = self._propose(text, direction, rules)
+        proposals.sort(key=lambda p: (-(p.score or 0), -(p.end - p.start), p.rule.style_level))
+        chosen = _resolve(proposals, limit_per_rule=(direction == "to_genz"))
+        return _build_response(text, chosen, proposals, top_k)
+
+    def _propose(self, text, direction, rules):
+        """Every place in text where a rule's pattern matches, as Proposals (unsorted)."""
+        words = self._tokenize(text)
+        scores = {row[0]: float(row[1]) for row in self.scorer(text)}
+        proposals = []
+        for r in rules:
             if direction == "to_genz":
                 score = scores.get(r.rule_id, 0.0)
                 if score < THRESHOLD:
@@ -64,41 +98,15 @@ class Translator:
             for pattern, template in pairs:
                 if template is None:
                     continue
-                for start, end, x in _find(tokens, pattern):
-                    proposals.append((start, end, _fill(template, x), r, score))
-
-        # แก้ rule ชนกัน
-        proposals.sort(key=lambda p: (-(p[4] or 0), -(p[1] - p[0]), p[3].style_level))
-        chosen, used = [], set()
-        for p in proposals:
-            if p[3].rule_id in used or any(p[0] < q[1] and q[0] < p[1] for q in chosen):
-                continue
-            chosen.append(p)
-            used.add(p[3].rule_id)
-
-        output = text
-        for start, end, rep, _, _ in sorted(chosen, key=lambda p: -p[0]):
-            output = output[:start] + rep + output[end:]
-
-        applied = [{"rule_id": r.rule_id, "from": text[s:e], "to": rep, "span": [s, e], "score": sc}
-                   for s, e, rep, r, sc in sorted(chosen, key=lambda p: p[0])]
-
-        # candidates: rule ที่คะแนนสูงสุด top_k ตัว (รวมตัวที่เจอคำในประโยค)
-        by_id = {r.rule_id: r for r in allowed}
-        ids = list(dict.fromkeys([p[3].rule_id for p in proposals] + list(scores)))
-        ids = [i for i in ids if i in by_id]
-        if direction == "to_genz":
-            ids.sort(key=lambda i: -scores.get(i, 0.0))
-        candidates = [{"rule_id": i, "to": by_id[i].target,
-                       "score": scores.get(i, 0.0) if direction == "to_genz" else None,
-                       "applied": i in used} for i in ids[:top_k]]
-        return {"output": output, "applied_rules": applied, "candidates": candidates}
+                for start, end, x in _find(words, pattern):
+                    proposals.append(Proposal(start, end, _fill(template, x), r, score))
+        return proposals
 
     def _tokenize(self, text):
-        """Return [(word, start offset)]."""
+        """Split text into Words, keeping whitespace tokens so offsets stay exact."""
         out, pos = [], 0
         for w in word_tokenize(text, custom_dict=self.trie, keep_whitespace=True):
-            out.append((w, pos))
+            out.append(Word(w, pos))
             pos += len(w)
         return out
 
@@ -109,33 +117,82 @@ class Translator:
         return same[0] if same else None
 
 
-def _find(tokens, pattern):
+def _resolve(proposals, limit_per_rule):
+    """Pick non-overlapping proposals, going through them in order (best first).
+
+    limit_per_rule: True = a rule is used at most rule.max_apply times (to_genz only).
+    """
+    chosen, used = [], {}
+    for p in proposals:
+        rid = p.rule.rule_id
+        if limit_per_rule and used.get(rid, 0) >= p.rule.max_apply:
+            continue
+        if any(p.overlaps(q) for q in chosen):
+            continue
+        chosen.append(p)
+        used[rid] = used.get(rid, 0) + 1
+    return chosen
+
+
+def _build_response(text, chosen, proposals, top_k):
+    """Apply the chosen replacements left to right and build {output, applied_rules}."""
+    output, shift, applied = text, 0, []    # shift = ความยาวที่เปลี่ยนไปสะสม ใช้หาตำแหน่งใน output
+    for p in sorted(chosen, key=lambda p: p.start):
+        out_start = p.start + shift
+        output = output[:out_start] + p.replacement + output[p.end + shift:]
+        shift += len(p.replacement) - (p.end - p.start)
+        applied.append({
+            "from": text[p.start:p.end],
+            "span": [p.start, p.end],
+            "output_span": [out_start, out_start + len(p.replacement)],
+            "candidates": _candidates(p, proposals, top_k),
+        })
+    return {"output": output, "applied_rules": applied}
+
+
+def _candidates(chosen, proposals, top_k):
+    """The applied proposal first, then other rules matching an overlapping span (best first)."""
+    result = [_as_candidate(chosen, applied=True)]
+    seen = {chosen.rule.rule_id}
+    for q in proposals:
+        if len(result) >= top_k:
+            break
+        if q.overlaps(chosen) and q.rule.rule_id not in seen:
+            seen.add(q.rule.rule_id)
+            result.append(_as_candidate(q, applied=False))
+    return result
+
+
+def _as_candidate(p, applied):
+    """A Proposal as one entry of the candidates list in the response."""
+    return {"rule_id": p.rule.rule_id, "to": p.replacement, "score": p.score, "applied": applied}
+
+
+def _find(words, pattern):
     """Find pattern in the sentence on word boundaries; return [(start, end, X)].
 
     Supports one {X} slot: '{X} มาก' (X = previous word), 'แอบ {X}' (X = following words
     up to a space), 'ช่วงนี้อินกับ {X} อีกแล้ว' (X = the words in between).
     """
-    words = [(w, s) for w, s in tokens if not w.isspace()]
+    words = [w for w in words if not w.text.isspace()]
     pre, _, post = (p.strip() for p in pattern.partition("{X}"))
-    has_x = "{X}" in pattern
     results = []
     for a, b in _literal(words, pre or post):
-        if not has_x:
-            results.append((words[a][1], _end(words[b]), None))
+        if "{X}" not in pattern:
+            results.append((words[a].start, words[b].end, None))
         elif not pre:                                   # {X} มาก
             if a > 0:
-                results.append((words[a - 1][1], _end(words[b]), words[a - 1][0]))
+                results.append((words[a - 1].start, words[b].end, words[a - 1].text))
         elif not post:                                  # แอบ {X}
             j = b + 1
-            while j + 1 < len(words) and _end(words[j]) == words[j + 1][1]:
+            while j + 1 < len(words) and words[j].end == words[j + 1].start:
                 j += 1                                  # เก็บคำที่ติดกันจนเจอช่องว่าง
             if j < len(words):
-                results.append((words[a][1], _end(words[j]), "".join(w for w, _ in words[b + 1:j + 1])))
+                results.append((words[a].start, words[j].end, _join(words[b + 1:j + 1])))
         else:                                           # pre {X} post
             for c, d in _literal(words, post):
                 if c > b + 1:
-                    x = "".join(w for w, _ in words[b + 1:c])
-                    results.append((words[a][1], _end(words[d]), x))
+                    results.append((words[a].start, words[d].end, _join(words[b + 1:c])))
                     break
     return results
 
@@ -147,7 +204,7 @@ def _literal(words, lit):
     for i in range(len(words)):
         acc = ""
         for j in range(i, len(words)):
-            acc += words[j][0].casefold()
+            acc += words[j].text.casefold()
             if acc == key:
                 hits.append((i, j))
             if not key.startswith(acc):
@@ -155,9 +212,9 @@ def _literal(words, lit):
     return hits
 
 
-def _end(word):
-    """Exclusive end offset of a (word, start) pair."""
-    return word[1] + len(word[0])
+def _join(words):
+    """Concatenate the text of consecutive Words (used to fill {X})."""
+    return "".join(w.text for w in words)
 
 
 def _fill(template, x):
