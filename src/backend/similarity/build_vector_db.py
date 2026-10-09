@@ -9,7 +9,7 @@ import pandas as pd
 from similarity_engine import DEFAULT_MODEL, clean_text, encode_texts
 from pathlib import Path
 HERE = Path(__file__).resolve().parent
-DEFAULT_EXCEL = str(HERE.parents[2] / "data" / "dataset_final.xlsx")
+DEFAULT_EXCEL = str(HERE.parents[2] / "data" / "dataset.xlsx")
 SHEET = "02_PROGRAM"
 
 

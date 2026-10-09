@@ -199,7 +199,7 @@ def score_rules(text, top_k=None, rule_ids=None):
       final_score    = train_score - contrast_score
 
     rule_ids: ให้คะแนนเฉพาะ rule ที่ระบุ (None = ทุก rule)
-    top_k: ตัดเหลือ k อันดับแรก (None = คืนทุก rule ให้คนที่ 3 กรอง threshold เอง)
+    top_k: ตัดเหลือ k อันดับแรก (None = คืนทุก rule ให้ translator กรอง threshold เอง)
     ข้อความว่าง -> []   ยังไม่พร้อม -> raise EngineNotReady
     """
     if not is_ready():

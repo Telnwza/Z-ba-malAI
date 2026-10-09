@@ -11,17 +11,18 @@ Z-ba-malAI/
 │   ├── backend/
 │   │   ├── app.py              # FastAPI POST /translate
 │   │   ├── rules.py            # โหลด rule จากชีท 02_PROGRAM ใน data/dataset.xlsx
-│   │   └── translator.py       # หาคำในประโยค, ตัดด้วยคะแนน, เลือก rule เมื่อชนกัน, แทนที่
+│   │   ├── translator.py       # หาคำในประโยค, ตัดด้วยคะแนน, เลือก rule เมื่อชนกัน, แทนที่
+│   │   └── similarity/         # ให้คะแนน rule ด้วย cosine similarity: engine, สคริปต์สร้างเวกเตอร์, .npy + metadata.json
 │   └── frontend/               # หน้าเว็บ (ยังว่าง)
 ├── data/
-│   └── dataset.xlsx            # dataset ของคนที่ 1
+│   └── dataset.xlsx            # dataset ของ rule (ใช้ชีท 02_PROGRAM)
 ├── docs/                       # เอกสาร (ยังว่าง)
 ├── tests/
-│   └── test_translator.py      # เทสต์ translator และ API
+│   ├── test_translator.py      # เทสต์ translator และ API
+│   ├── threshold_eval.csv      # ประโยคพร้อมเฉลยว่าคำไหนควร/ไม่ควรแปลง (ร่าง)
+│   └── tune_threshold.py       # ไล่หาค่า THRESHOLD จาก threshold_eval.csv
 └── requirements.txt
 ```
-
-`src/backend/similarity_engine.py` ของคนที่ 2 ยังไม่มี (ดูหัวข้อ "เชื่อมกับงานคนที่ 2")
 
 ## รัน (Windows, Python 3.10+)
 
@@ -35,6 +36,25 @@ uvicorn src.backend.app:app --reload
 ```
 
 เปิด http://127.0.0.1:8000/docs เพื่อลองเรียก API · รันเทสต์: `python -m pytest -q`
+
+### โมเดล `BAAI/bge-m3`
+
+`to_genz` ต้องใช้โมเดลแปลงประโยคที่ผู้ใช้พิมพ์เป็นเวกเตอร์ (เวกเตอร์ของประโยคใน dataset คำนวณไว้แล้วใน `src/backend/similarity/*.npy`)
+`to_normal` และเทสต์ไม่ต้องใช้โมเดล
+
+- เซิร์ฟเวอร์โหลดโมเดลตอนเปิด (`uvicorn` จะใช้เวลาสักพักก่อนพร้อม) ครั้งแรกจะดาวน์โหลดเอง (~2 GB)
+  เก็บไว้ที่ `~/.cache/huggingface` ครั้งต่อไปไม่ต้องโหลดอีก
+- ถ้าโหลดไม่สำเร็จ เซิร์ฟเวอร์ยังเปิดได้และพิมพ์สาเหตุไว้ใน log; `to_normal` ใช้ได้ ส่วน `to_genz` จะลองโหลดใหม่ตอนถูกเรียก
+- ดาวน์โหลดโมเดลไว้ก่อนได้ด้วย `python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('BAAI/bge-m3')"`
+
+ถ้าเจอ `SSLError ... CERTIFICATE_VERIFY_FAILED: unable to get local issuer certificate` ตอนโหลด
+(มักเกิดจากแอนตี้ไวรัสหรือเน็ตองค์กร/มหาลัยที่ดักตรวจ https) ให้ Python ใช้ใบรับรองของ Windows แล้วรันใหม่
+
+```bash
+python -m pip install pip-system-certs
+```
+
+หรือลองต่อเน็ตอื่น (เช่นแชร์จากมือถือ) แค่ตอนโหลดครั้งแรก ห้ามแก้ด้วยการปิดการตรวจ SSL (`verify=False`)
 
 ## API: `POST /translate`
 
@@ -72,7 +92,7 @@ uvicorn src.backend.app:app --reload
 | --- | --- | --- |
 | `rule_id` | string | เช่น `"P018"` จากชีท `02_PROGRAM` (เลขเลื่อนได้เมื่อ dataset เปลี่ยน) |
 | `to` | string | คำที่ใส่แทน (ถ้า rule มี `{X}` จะเติมคำแล้ว เช่น `"เหนื่อยจัด"`) |
-| `score` | number \| null | คะแนน final จากคนที่ 2 ทิศทาง `to_normal` เป็น null (เจอแบบตรงตัว) |
+| `score` | number \| null | คะแนน `final_score` จาก similarity (ดูหัวข้อ "การให้คะแนน") ทิศทาง `to_normal` เป็น null (เจอแบบตรงตัว) |
 | `applied` | bool | true = ตัวที่ใช้จริงใน `output` |
 
 หมายเหตุ
@@ -88,7 +108,7 @@ uvicorn src.backend.app:app --reload
 
 ### ตัวอย่าง
 
-ผลรันจริงกับ `data/dataset.xlsx` ตอนที่ยังไม่มี `similarity_engine.py` คะแนนจึงเป็น 0 ทุกตัว
+ผลรันจริงกับ `data/dataset.xlsx` และโมเดล `BAAI/bge-m3` (ปัดคะแนนเหลือ 2 ตำแหน่ง)
 
 ```json
 // request
@@ -96,17 +116,17 @@ uvicorn src.backend.app:app --reload
 
 // response
 {
-  "output": "งงเลยคับ เหนื่อยจัด",
+  "output": "งงเลยคับ เหนื่อยม้าก",
   "applied_rules": [
     { "from": "ไม่เข้าใจ", "span": [0, 9], "output_span": [0, 2],
-      "candidates": [{ "rule_id": "P018", "to": "งง", "score": 0.0, "applied": true }] },
+      "candidates": [{ "rule_id": "P018", "to": "งง", "score": 0.19, "applied": true }] },
     { "from": "ครับ", "span": [12, 16], "output_span": [5, 8],
-      "candidates": [{ "rule_id": "P003", "to": "คับ", "score": 0.0, "applied": true }] },
-    { "from": "เหนื่อยมาก", "span": [17, 27], "output_span": [9, 19],
+      "candidates": [{ "rule_id": "P003", "to": "คับ", "score": 0.06, "applied": true }] },
+    { "from": "มาก", "span": [24, 27], "output_span": [16, 20],
       "candidates": [
-        { "rule_id": "P014", "to": "เหนื่อยจัด", "score": 0.0, "applied": true },
-        { "rule_id": "P015", "to": "เหนื่อยเกิน", "score": 0.0, "applied": false },
-        { "rule_id": "P016", "to": "เหนื่อยสุด", "score": 0.0, "applied": false }
+        { "rule_id": "P042", "to": "ม้าก", "score": 0.21, "applied": true },
+        { "rule_id": "P013", "to": "โคตรเหนื่อย", "score": 0.2, "applied": false },
+        { "rule_id": "P015", "to": "เหนื่อยเกิน", "score": 0.14, "applied": false }
       ] }
   ]
 }
@@ -133,14 +153,15 @@ curl -X POST http://127.0.0.1:8000/translate -H "Content-Type: application/json"
   -d '{"text": "ไม่เข้าใจเลยครับ", "direction": "to_genz"}'
 ```
 
-## เชื่อมกับงานคนที่ 2
+## การให้คะแนน (Similarity)
 
-วางไฟล์ `src/backend/similarity_engine.py` โดยมีฟังก์ชัน
+`src/backend/translator.py` เรียก `score_rules(text)` ใน `src/backend/similarity/similarity_engine.py`
+ซึ่งคืนคะแนนของทุก rule (`rule_id`, `final_score`, `train_score`, `contrast_score`, ...) โดย
+`final_score = max cos(train) − max cos(contrast)`
+และใช้ rule ใน `to_genz` เฉพาะเมื่อ `final_score` ≥ `THRESHOLD` ใน `src/backend/translator.py`
 
-```python
-def score_rules(text: str) -> list[tuple[str, float, float, float]]:
-    """[(rule_id, final, train_score, contrast_score), ...]  rule_id = P001… จากชีท 02_PROGRAM"""
-```
-
-ถ้ายังไม่มีไฟล์นี้ ทุก rule ได้คะแนน 0 ระบบจะทำงานแบบ keyword match ล้วน
-เมื่อมีแล้วให้ปรับ `THRESHOLD` ใน `src/backend/translator.py`
+- เวกเตอร์ใน `similarity/*.npy` + `metadata.json` ต้องสร้างจาก dataset ชุดเดียวกับ `data/dataset.xlsx` เพราะเลข Rule ID เลื่อนได้
+  เมื่อ dataset เปลี่ยนให้รัน `python build_vector_db.py` ในโฟลเดอร์ `src/backend/similarity` (อ่าน `data/dataset.xlsx` เป็นค่าเริ่มต้น)
+- ถ้า import engine ไม่ได้ ทุก rule ได้คะแนน 0 ระบบจะทำงานแบบ keyword match ล้วน
+- หาค่า `THRESHOLD`: `python tests/tune_threshold.py` (ใช้โมเดลจริง) แสดง precision / recall / F1 ของแต่ละค่าบน
+  `tests/threshold_eval.csv` คอลัมน์ `convert` = คำที่ควรแปลง, `keep` = คำที่ห้ามแปลง (`*` = ห้ามแปลงทั้งประโยค) คั่นด้วย `|`
