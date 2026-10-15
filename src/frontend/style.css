@@ -191,6 +191,7 @@ textarea.field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--
   font-size: 15px;
   cursor: pointer;
   user-select: none;
+  margin-block-start: 9px;
 }
 .rude input { width: 17px; height: 17px; margin: 0; accent-color: var(--accent); }
 
@@ -202,6 +203,7 @@ textarea.field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: #fcfcfd;
+  margin-block-start: 9px;
 }
 .more__title {
   margin: 0 0 8px;
