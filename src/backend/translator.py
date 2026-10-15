@@ -1,6 +1,6 @@
 """Translation logic for both directions.
 
-Normal -> Gen Z: source word found in the sentence + score from person 2 >= THRESHOLD -> replace.
+Normal -> Gen Z: source word found in the sentence + similarity score >= THRESHOLD -> replace.
 Gen Z -> Normal: Gen Z word (Target / Variants) found in the sentence -> replace with the normal word.
 Overlapping rules: highest score wins, then the longer span, then the lower Style Level.
 """
@@ -12,15 +12,28 @@ from pythainlp.tokenize import Trie, word_tokenize
 
 from .rules import Rule, load_rules
 
-THRESHOLD = 0.0                 # คนที่ 2 หาค่าจริงจาก test set แล้วมาแก้ตรงนี้
+THRESHOLD = 0.0                 # คะแนน final ขั้นต่ำ ปรับตามผลทดสอบกับ test set
 PROFANE = {"Profanity", "Insult"}
 
 try:
-    # งานคนที่ 2: score_rules(text) -> [(rule_id, final, train, contrast), ...]
-    from .similarity_engine import score_rules
+    from .similarity import similarity_engine as engine
 except ImportError:
-    def score_rules(text):      # ยังไม่มี → ทุก rule ได้ 0 ระบบจะทำงานแบบ keyword match
+    engine = None               # ไม่มี → ทุก rule ได้ 0 ระบบจะทำงานแบบ keyword match
+
+
+def load_engine():
+    """Load the similarity model and vectors if not loaded yet (slow the first time)."""
+    if engine is not None and not engine.is_ready():
+        engine.init_engine()
+
+
+def score_rules(text):
+    """Similarity scores of every rule as [(rule_id, final, train_score, contrast_score), ...]."""
+    if engine is None:
         return []
+    load_engine()
+    return [(r["rule_id"], r["final_score"], r["train_score"], r["contrast_score"])
+            for r in engine.score_rules(text)]
 
 
 class Word(NamedTuple):
@@ -49,13 +62,15 @@ class Translator:
     """Sentence translator. Build once, then call translate() repeatedly.
 
     rules: optional; loaded from the dataset when omitted.
-    scorer: a function shaped like person 2's score_rules; tests pass fake scores here.
+    scorer: a function shaped like score_rules; tests pass fake scores here.
+    threshold: minimum final score for to_genz (python tests/tune_threshold.py sweeps it).
     """
 
-    def __init__(self, rules: list[Rule] | None = None, scorer=score_rules):
+    def __init__(self, rules: list[Rule] | None = None, scorer=score_rules, threshold=THRESHOLD):
         """Prepare the rules and the tokenizer dictionary (common Thai words + rule words, so Gen Z words tokenize correctly)."""
         self.rules = rules or load_rules()
         self.scorer = scorer
+        self.threshold = threshold
         words = set(thai_words())
         for r in self.rules:
             for form in r.triggers + r.informal_forms:
@@ -84,12 +99,13 @@ class Translator:
     def _propose(self, text, direction, rules):
         """Every place in text where a rule's pattern matches, as Proposals (unsorted)."""
         words = self._tokenize(text)
-        scores = {row[0]: float(row[1]) for row in self.scorer(text)}
+        # to_normal ไม่ใช้คะแนน ไม่ต้องเรียกโมเดล
+        scores = {row[0]: float(row[1]) for row in self.scorer(text)} if direction == "to_genz" else {}
         proposals = []
         for r in rules:
             if direction == "to_genz":
                 score = scores.get(r.rule_id, 0.0)
-                if score < THRESHOLD:
+                if score < self.threshold:
                     continue
                 pairs = [(t, r.target) for t in r.triggers]
             else:
@@ -138,9 +154,13 @@ def _build_response(text, chosen, proposals, top_k):
     """Apply the chosen replacements left to right and build {output, applied_rules}."""
     output, shift, applied = text, 0, []    # shift = ความยาวที่เปลี่ยนไปสะสม ใช้หาตำแหน่งใน output
     for p in sorted(chosen, key=lambda p: p.start):
-        out_start = p.start + shift
-        output = output[:out_start] + p.replacement + output[p.end + shift:]
-        shift += len(p.replacement) - (p.end - p.start)
+        before, after = output[:p.start + shift], output[p.end + shift:]
+        # เว้นวรรคถ้าคำอังกฤษไปติดกับคำไทย เช่น "TYที่มาส่ง" -> "TY ที่มาส่ง"
+        left = _space(before[-1:], p.replacement[:1])
+        right = _space(p.replacement[-1:], after[:1])
+        out_start = len(before) + len(left)
+        output = before + left + p.replacement + right + after
+        shift += len(left) + len(p.replacement) + len(right) - (p.end - p.start)
         applied.append({
             "from": text[p.start:p.end],
             "span": [p.start, p.end],
@@ -148,6 +168,16 @@ def _build_response(text, chosen, proposals, top_k):
             "candidates": _candidates(p, proposals, top_k),
         })
     return {"output": output, "applied_rules": applied}
+
+
+def _space(a, b):
+    """" " when characters a and b are one Thai and one Latin letter/digit, else ""."""
+    def thai(c):
+        return "฀" <= c <= "๿"
+
+    def latin(c):
+        return c.isascii() and c.isalnum()
+    return " " if a and b and (thai(a) and latin(b) or latin(a) and thai(b)) else ""
 
 
 def _candidates(chosen, proposals, top_k):
@@ -204,7 +234,7 @@ def _literal(words, lit):
     for i in range(len(words)):
         acc = ""
         for j in range(i, len(words)):
-            acc += words[j].text.casefold()
+            acc += re.sub(r"\s+", "", words[j].text).casefold()   # บางคำมีช่องว่างข้างใน เช่น "เงียบ ๆ"
             if acc == key:
                 hits.append((i, j))
             if not key.startswith(acc):

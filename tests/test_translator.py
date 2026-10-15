@@ -50,6 +50,18 @@ def test_x_patterns(rules):
     assert t.translate("ช่วงนี้กำลังอินกับการอ่าน", "to_genz")["output"] == "in my การอ่าน era"
 
 
+def test_pattern_with_space_inside_token(rules):
+    # "เงียบ ๆ" ถูกตัดเป็นคำเดียวที่มีช่องว่างข้างใน
+    res = make(rules, {"ghost": 0.5}).translate("เขาหายไปเงียบ ๆ ไม่ตอบแชทเลย", "to_genz")
+    assert res["output"] == "เขา ghost ไม่ตอบแชทเลย"
+
+
+def test_space_between_thai_and_latin(rules):
+    res = make(rules, {"sus": 0.5}).translate("เขาดูน่าสงสัยนะ", "to_genz")
+    assert res["output"] == "เขาดู sus นะ"
+    assert res["applied_rules"][0]["output_span"] == [6, 9]
+
+
 def test_allow_profanity_unlocks_level_4(rules):
     t = make(rules, {"กู": 0.9})
     assert t.translate("ฉันเหนื่อย", "to_genz")["output"] == "ฉันเหนื่อย"

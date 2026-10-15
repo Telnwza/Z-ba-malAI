@@ -2,15 +2,28 @@
 
 Run: uvicorn src.backend.app:app --reload   then open http://127.0.0.1:8000/docs
 """
+from contextlib import asynccontextmanager
 from typing import Literal
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from .translator import Translator
+from .translator import Translator, load_engine, score_rules
 
-app = FastAPI(title="Thai Gen Z Translator")
+
+@asynccontextmanager
+async def lifespan(app):
+    """Load the similarity model at startup so the first to_genz request is not slow."""
+    try:
+        load_engine()
+        score_rules("สวัสดี")  # encode ครั้งแรกช้า ทำไว้ก่อนให้ request แรกเร็ว
+    except Exception as e:      # โหลดไม่ได้ (เช่นไม่มีเน็ต/SSL) → to_normal ยังใช้ได้ to_genz จะลองโหลดใหม่ตอนถูกเรียก
+        print(f"โหลดโมเดล similarity ไม่สำเร็จ: {e!r}")
+    yield
+
+
+app = FastAPI(title="Thai Gen Z Translator", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 translator = Translator()
 
