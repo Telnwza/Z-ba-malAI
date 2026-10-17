@@ -94,6 +94,8 @@ rules_info = {}
 all_rule_ids = []
 train_idx = {}       # rule_id -> np.array ของแถวใน E_train
 contrast_idx = {}    # rule_id -> np.array ของแถวใน E_contrast
+E_all = None         # train + contrast ต่อกัน ใช้โหวตเพื่อนบ้านใน register_score
+reg_labels = None    # +1 = แถวของ train, -1 = แถวของ contrast
 
 
 def is_ready():
@@ -106,7 +108,7 @@ def init_engine(data_dir=None, model_name_override=None, encoder=None):
     if data_dir is None:
         data_dir = os.path.dirname(os.path.abspath(__file__))
     global model, model_name, config, E_train, E_contrast, train_meta, contrast_meta
-    global rules_info, all_rule_ids, train_idx, contrast_idx
+    global rules_info, all_rule_ids, train_idx, contrast_idx, E_all, reg_labels
 
     with open(os.path.join(data_dir, "metadata.json"), "r", encoding="utf-8") as f:
         metadata = json.load(f)
@@ -150,6 +152,8 @@ def init_engine(data_dir=None, model_name_override=None, encoder=None):
     all_rule_ids = sorted(t_map)
     train_idx = {r: np.array(v) for r, v in t_map.items()}
     contrast_idx = {r: np.array(v) for r, v in c_map.items()}
+    E_all = np.vstack([Et, Ec]) if len(Ec) else Et
+    reg_labels = np.r_[np.ones(len(Et)), -np.ones(len(Ec))].astype(np.float32)
     _encode_cached.cache_clear()
 
     print(f"โหลดระบบ Similarity เรียบร้อย (model={name}, Train={Et.shape[0]}, "
@@ -187,7 +191,44 @@ def encode_query(text):
 # ==========================================
 # ฟังก์ชันหลักสำหรับโฟล์ม
 # ==========================================
-def score_rules(text, top_k=None, rule_ids=None):
+def register_score(q, k=10):
+    """ตัวตรวจ "ระดับภาษา": โหวตจากประโยคอ้างอิงที่ใกล้ q ที่สุด k ตัว ของ **ทุก rule** รวมกัน
+    Train = +1 (ประโยคที่ rule ควรโดน เป็นภาษาแชท), Contrast = -1 (ไม่ควรโดน ส่วนใหญ่เป็นภาษาทางการ/ความหมายอื่น)
+    ถ่วงน้ำหนักด้วย cosine คืนค่า -1..+1 (ใกล้ -1 = ใกล้ประโยค Contrast เช่น ประโยคทางการ)
+    ค่านี้ไม่ขึ้นกับ rule จึงช่วยได้แม้ rule นั้นมี Contrast ไม่ครอบคลุม"""
+    sims = E_all @ q
+    k = max(1, min(int(k), len(sims)))
+    top = np.argpartition(-sims, k - 1)[:k]
+    w = np.clip(sims[top], 1e-6, None)
+    return float((reg_labels[top] * w).sum() / w.sum())
+
+
+_LEAD_VOWELS = "เแโใไ"   # สระหน้า: ต้องมีพยัญชนะตามหลังเสมอ
+
+
+def context_window(text, span, radius=15):
+    """ตัดเฉพาะข้อความรอบคำที่เจอ: span=(start, end) นับตัวอักษรในข้อความต้นฉบับแบบ slice
+    ขยายซ้าย/ขวาข้างละ radius ตัวอักษร (ประโยคอ้างอิงยาวเฉลี่ย ~31 ตัวอักษร
+    radius=15 จึงให้หน้าต่างยาวใกล้เคียงกัน) ไม่ตัดกลางพยางค์ไทย
+    span=None หรือ radius=None หรือ span ผิดช่วง -> คืนข้อความเต็ม"""
+    if span is None or radius is None:
+        return text
+    n = len(text)
+    start, end = int(span[0]), int(span[1])
+    if not (0 <= start <= end <= n):
+        return text
+    left = max(0, start - radius)
+    right = min(n, end + radius)
+    # สระบน/ล่าง/วรรณยุกต์ (Mn) ต้องมีพยัญชนะฐานติดมา และสระหน้าต้องมีพยัญชนะตามหลัง
+    while left > 0 and (unicodedata.category(text[left]) == "Mn" or text[left - 1] in _LEAD_VOWELS):
+        left -= 1
+    while right < n and (unicodedata.category(text[right]) == "Mn" or text[right - 1] in _LEAD_VOWELS):
+        right += 1
+    return text[left:right]
+
+
+def score_rules(text, top_k=None, rule_ids=None, contrast_weight=1.0, span=None, radius=15,
+                register_weight=0.0, register_k=10):
     """
     คืน list ของ dict เรียง final_score มาก -> น้อย:
       rule_id, final_score, train_score, contrast_score,
@@ -196,21 +237,28 @@ def score_rules(text, top_k=None, rule_ids=None):
     สูตรเดียว (ตามสเปก):
       train_score    = max cos(q, ประโยคอ้างอิง train ของ rule)
       contrast_score = max cos(q, contrast ของ rule)  หรือ 0 ถ้าไม่มี contrast
-      final_score    = train_score - contrast_score
+      final_score    = train_score - contrast_weight * contrast_score + register_weight * register_score
+      margin         = train_score - contrast_score   (ไว้ใช้เป็นตัวกรอง: margin < 0 = ใกล้ประโยค contrast กว่า train)
 
     rule_ids: ให้คะแนนเฉพาะ rule ที่ระบุ (None = ทุก rule)
+    contrast_weight: น้ำหนักของ contrast ในสูตร (1.0 = สูตรเดิมตามสเปก, 0.0 = จัดอันดับด้วย train อย่างเดียว)
+    register_weight, register_k: บวกคะแนน "ระดับภาษา" (register_score, -1..+1) เข้า final ทุก rule เท่ากัน
+                  ประโยคทางการได้ค่าติดลบ -> คะแนนลด 0.0 = ไม่ใช้ (เหมือนเดิม)
+    span, radius: translator ส่งตำแหน่งคำ (start, end) มา -> ให้คะแนนเฉพาะช่วงรอบคำ (ดู context_window)
+                  ไม่ส่ง span = ให้คะแนนทั้งข้อความเหมือนเดิม
     top_k: ตัดเหลือ k อันดับแรก (None = คืนทุก rule ให้ translator กรอง threshold เอง)
     ข้อความว่าง -> []   ยังไม่พร้อม -> raise EngineNotReady
     """
     if not is_ready():
         raise EngineNotReady("model or vectors not loaded")
-    text = clean_text(text)
+    text = clean_text(context_window(text, span, radius))   # ตัดหน้าต่างก่อน แล้วค่อย clean
     if not text:
         return []
 
     q = encode_query(text)
     t_all = E_train @ q
     c_all = E_contrast @ q if E_contrast.shape[0] else np.empty(0, dtype=np.float32)
+    register = register_score(q, register_k) if register_weight else 0.0
 
     wanted = all_rule_ids if rule_ids is None else [r for r in rule_ids if r in train_idx]
     results = []
@@ -224,7 +272,9 @@ def score_rules(text, top_k=None, rule_ids=None):
         contrast_score = float(c_all[bc]) if bc is not None else 0.0
         results.append({
             "rule_id": rid,
-            "final_score": train_score - contrast_score,
+            "final_score": train_score - contrast_weight * contrast_score + register_weight * register,
+            "margin": train_score - contrast_score,
+            "register": register,
             "train_score": train_score,
             "contrast_score": contrast_score,
             "best_train_sentence": train_meta[bt]["sentence"],
