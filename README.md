@@ -112,21 +112,23 @@ python -m pip install pip-system-certs
 
 ```json
 // request
-{ "text": "ไม่เข้าใจเลยครับ เหนื่อยมาก", "direction": "to_genz", "top_k": 3 }
+{
+  "text": "ไม่เข้าใจเลยครับ เหนื่อยมาก", "direction": "to_genz", "max_style_level": 3, "allow_profanity": false, "top_k": 3
+}
 
 // response
 {
-  "output": "งงเลยคับ เหนื่อยม้าก",
+  "output": "งงเลยคับ โคตรเหนื่อย",
   "applied_rules": [
     { "from": "ไม่เข้าใจ", "span": [0, 9], "output_span": [0, 2],
-      "candidates": [{ "rule_id": "P018", "to": "งง", "score": 0.19, "applied": true }] },
+      "candidates": [{ "rule_id": "P018", "to": "งง", "score": 1.2594401240348816, "applied": true }] },
     { "from": "ครับ", "span": [12, 16], "output_span": [5, 8],
-      "candidates": [{ "rule_id": "P003", "to": "คับ", "score": 0.06, "applied": true }] },
-    { "from": "มาก", "span": [24, 27], "output_span": [16, 20],
+      "candidates": [{ "rule_id": "P003", "to": "คับ", "score": 1.1629675924777985, "applied": true }] },
+    { "from": "เหนื่อยมาก", "span": [17, 27], "output_span": [9, 20],
       "candidates": [
-        { "rule_id": "P042", "to": "ม้าก", "score": 0.21, "applied": true },
-        { "rule_id": "P013", "to": "โคตรเหนื่อย", "score": 0.2, "applied": false },
-        { "rule_id": "P015", "to": "เหนื่อยเกิน", "score": 0.14, "applied": false }
+        { "rule_id": "P013", "to": "โคตรเหนื่อย", "score": 1.2587281167507172, "applied": true },
+        { "rule_id": "P042", "to": "ม้าก", "score": 1.2289806604385376, "applied": false },
+        { "rule_id": "P015", "to": "เหนื่อยเกิน", "score": 1.185782477259636, "applied": false }
       ] }
   ]
 }
