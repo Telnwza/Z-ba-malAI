@@ -12,7 +12,12 @@ from pythainlp.tokenize import Trie, word_tokenize
 
 from .rules import Rule, load_rules
 
-THRESHOLD = 0.0                 # คะแนน final ขั้นต่ำ ปรับตามผลทดสอบกับ test set
+THRESHOLD = 0.54                 # คะแนน final ขั้นต่ำ ปรับตามผลทดสอบกับ test set
+CONTRAST_WEIGHT = 0.5          # น้ำหนักของ contrast ในคะแนน (1.0 = train - contrast, 0.0 = train อย่างเดียว)
+WINDOW_RADIUS = None            # ให้คะแนนเฉพาะรอบคำที่เจอ ข้างละกี่ตัวอักษร (None = ทั้งประโยค)
+REGISTER_WEIGHT = 1.0           # น้ำหนักของตัวตรวจระดับภาษา (ประโยคทางการได้คะแนนลด) 0.0 = ไม่ใช้
+REGISTER_K = 10                 # จำนวนเพื่อนบ้านที่ใช้โหวตระดับภาษา
+MARGIN_MIN = None               # ตัด rule ที่ train - contrast ต่ำกว่าค่านี้ (None = ไม่กรอง)
 PROFANE = {"Profanity", "Insult"}
 
 try:
@@ -27,13 +32,18 @@ def load_engine():
         engine.init_engine()
 
 
-def score_rules(text):
-    """Similarity scores of every rule as [(rule_id, final, train_score, contrast_score), ...]."""
+def score_rules(text, span=None, radius=None, contrast_weight=CONTRAST_WEIGHT,
+                register_weight=REGISTER_WEIGHT, register_k=REGISTER_K):
+    """Similarity scores of every rule as [(rule_id, final, train_score, contrast_score), ...].
+
+    span=(start, end) + radius: score only the text around that word instead of the whole sentence.
+    """
     if engine is None:
         return []
     load_engine()
     return [(r["rule_id"], r["final_score"], r["train_score"], r["contrast_score"])
-            for r in engine.score_rules(text)]
+            for r in engine.score_rules(text, span=span, radius=radius, contrast_weight=contrast_weight,
+                                        register_weight=register_weight, register_k=register_k)]
 
 
 class Word(NamedTuple):
@@ -64,13 +74,24 @@ class Translator:
     rules: optional; loaded from the dataset when omitted.
     scorer: a function shaped like score_rules; tests pass fake scores here.
     threshold: minimum final score for to_genz (python tests/tune_threshold.py sweeps it).
+    window_radius: score only the text around each matched word (chars each side); None = whole sentence.
+    contrast_weight: weight of the Contrast score in final (1.0 = train - contrast).
+    margin_min: drop a match when train - contrast is below this; None = no check.
+    register_weight, register_k: add the formality score (-1 formal .. +1 chat) times this weight to final; 0.0 = off.
     """
 
-    def __init__(self, rules: list[Rule] | None = None, scorer=score_rules, threshold=THRESHOLD):
+    def __init__(self, rules: list[Rule] | None = None, scorer=score_rules, threshold=THRESHOLD,
+                 window_radius=WINDOW_RADIUS, contrast_weight=CONTRAST_WEIGHT, margin_min=MARGIN_MIN,
+                 register_weight=REGISTER_WEIGHT, register_k=REGISTER_K):
         """Prepare the rules and the tokenizer dictionary (common Thai words + rule words, so Gen Z words tokenize correctly)."""
         self.rules = rules or load_rules()
         self.scorer = scorer
         self.threshold = threshold
+        self.window_radius = window_radius
+        self.contrast_weight = contrast_weight
+        self.margin_min = margin_min
+        self.register_weight = register_weight
+        self.register_k = register_k
         words = set(thai_words())
         for r in self.rules:
             for form in r.triggers + r.informal_forms:
@@ -99,24 +120,45 @@ class Translator:
     def _propose(self, text, direction, rules):
         """Every place in text where a rule's pattern matches, as Proposals (unsorted)."""
         words = self._tokenize(text)
-        # to_normal ไม่ใช้คะแนน ไม่ต้องเรียกโมเดล
-        scores = {row[0]: float(row[1]) for row in self.scorer(text)} if direction == "to_genz" else {}
+        cache = {}      # span -> {rule_id: row}  (to_normal ไม่ใช้คะแนน ไม่เรียกโมเดล)
         proposals = []
         for r in rules:
             if direction == "to_genz":
-                score = scores.get(r.rule_id, 0.0)
-                if score < self.threshold:
-                    continue
                 pairs = [(t, r.target) for t in r.triggers]
             else:
-                score = None
                 pairs = [(f, self._normal_for(r, f)) for f in r.informal_forms]
             for pattern, template in pairs:
                 if template is None:
                     continue
                 for start, end, x in _find(words, pattern):
+                    score = None
+                    if direction == "to_genz":
+                        rows = self._scores(text, (start, end), cache)
+                        if rows:            # rows ว่าง = ใช้ engine ไม่ได้ -> ไม่กรองด้วยคะแนน (keyword match ล้วน)
+                            row = rows.get(r.rule_id)
+                            score = float(row[1]) if row else 0.0
+                            if score < self.threshold:
+                                continue
+                            if self.margin_min is not None and row and row[2] - row[3] < self.margin_min:
+                                continue
                     proposals.append(Proposal(start, end, _fill(template, x), r, score))
         return proposals
+
+    def _scores(self, text, span, cache):
+        """Scores of every rule for the match at span, as {rule_id: row}; one model call per distinct window."""
+        key = span if self.window_radius is not None else None     # ทั้งประโยค: เรียกครั้งเดียว
+        if key not in cache:
+            kwargs = {}
+            if self.window_radius is not None:
+                kwargs.update(span=span, radius=self.window_radius)
+            if self.contrast_weight != CONTRAST_WEIGHT:
+                kwargs["contrast_weight"] = self.contrast_weight
+            if self.register_weight != REGISTER_WEIGHT:
+                kwargs["register_weight"] = self.register_weight
+            if self.register_k != REGISTER_K:
+                kwargs["register_k"] = self.register_k
+            cache[key] = {row[0]: row for row in self.scorer(text, **kwargs)}
+        return cache[key]
 
     def _tokenize(self, text):
         """Split text into Words, keeping whitespace tokens so offsets stay exact."""

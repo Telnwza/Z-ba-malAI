@@ -18,7 +18,7 @@ def make(rules, scores_by_target):
     ids = {r.target: r.rule_id for r in rules}
     rows = [(ids[t], s, 0, 0) for t, s in scores_by_target.items()]
     rows += [(r.rule_id, -1.0, 0, 0) for r in rules if r.target not in scores_by_target]
-    return Translator(rules, scorer=lambda text: rows)
+    return Translator(rules, scorer=lambda text: rows, threshold=0.0)   # เทสต์ใช้คะแนนปลอม ไม่ผูกกับ THRESHOLD จริง
 
 
 def test_to_genz(rules):
