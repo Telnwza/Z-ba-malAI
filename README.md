@@ -155,13 +155,11 @@ curl -X POST http://127.0.0.1:8000/translate -H "Content-Type: application/json"
 
 ## การให้คะแนน (Similarity)
 
-`src/backend/translator.py` เรียก `score_rules(text)` ใน `src/backend/similarity/similarity_engine.py`
-ซึ่งคืนคะแนนของทุก rule (`rule_id`, `final_score`, `train_score`, `contrast_score`, ...) โดย
-`final_score = max cos(train) − max cos(contrast)`
-และใช้ rule ใน `to_genz` เฉพาะเมื่อ `final_score` ≥ `THRESHOLD` ใน `src/backend/translator.py`
+`src/backend/translator.py` เรียก `score_rules(text)` ใน `src/backend/similarity/similarity_engine.py` ซึ่งคืนคะแนนของทุก rule โดย `final_score = max cos(train) − CONTRAST_WEIGHT × max cos(contrast) + REGISTER_WEIGHT × register_score` `register_score` (−1 ถึง +1) คือผลโหวตของประโยคอ้างอิงที่ใกล้ข้อความที่สุด 10 ประโยคจากทุก rule ถ้าใกล้ประโยค Contrast (ภาษาทางการ) ค่าจะติดลบและคะแนนลด ใช้ rule ใน `to_genz` เฉพาะเมื่อ `final_score ≥ THRESHOLD` ค่าทั้งหมดตั้งใน `src/backend/translator.py`
 
 - เวกเตอร์ใน `similarity/*.npy` + `metadata.json` ต้องสร้างจาก dataset ชุดเดียวกับ `data/dataset.xlsx` เพราะเลข Rule ID เลื่อนได้
   เมื่อ dataset เปลี่ยนให้รัน `python build_vector_db.py` ในโฟลเดอร์ `src/backend/similarity` (อ่าน `data/dataset.xlsx` เป็นค่าเริ่มต้น)
-- ถ้า import engine ไม่ได้ ทุก rule ได้คะแนน 0 ระบบจะทำงานแบบ keyword match ล้วน
+- ถ้าใช้ engine ไม่ได้ จะไม่กรองด้วยคะแนน ระบบทำงานแบบ keyword match ล้วน (`score` เป็น `null`)
 - หาค่า `THRESHOLD`: `python tests/tune_threshold.py` (ใช้โมเดลจริง) แสดง precision / recall / F1 ของแต่ละค่าบน
-  `tests/threshold_eval.csv` คอลัมน์ `convert` = คำที่ควรแปลง, `keep` = คำที่ห้ามแปลง (`*` = ห้ามแปลงทั้งประโยค) คั่นด้วย `|`
+  `tests/threshold_eval.csv` คอลัมน์ `convert` = คำที่ควรแปลง, `keep` = คำที่ห้ามแปลง (`*` = ห้ามแปลงทั้งประโยค) คั่นด้วย `|` 
+  `python tests/tune_threshold.py` ไล่หลายชุดค่าในรอบเดียว (เพิ่ม `--sweep` เพื่อดูเส้นโค้ง) และ `python tests/tune_threshold.py --check ไฟล์.csv` ตรวจชุดทดสอบใหม่ด้วยค่าที่ตั้งไว้ ต้องรันใหม่ทุกครั้งที่ dataset หรือเวกเตอร์เปลี่ยน
