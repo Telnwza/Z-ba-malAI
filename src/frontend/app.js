@@ -12,7 +12,6 @@
     (location.port === '8000' ? location.origin : 'http://localhost:8000');
   var ENDPOINT = API_BASE.replace(/\/+$/, '') + '/translate';
 
-  var DEBOUNCE_MS      = 500;  // wait this long after typing stops
   var MAX_STYLE_LEVEL  = 3;    // 1-4
   var TOP_K            = 5;    // 1-10
   var MAX_CHARS        = 500;
@@ -53,7 +52,6 @@
   };
 
   var controller = null;    // in-flight request
-  var timer = null;         // debounce timer
   var ruleEls = [];         // <details> per rule, for highlight -> rule jumps
 
   /* --------------------------------------------------------- helpers --- */
@@ -127,8 +125,8 @@
 
   function updateCount() {
     var n = cpLen(els.input.value);
-    els.count.textContent = String(n);
-    els.counter.classList.toggle('counter--max', n >= MAX_CHARS);
+    if (els.count) els.count.textContent = String(n);
+    if (els.counter) els.counter.classList.toggle('counter--max', n >= MAX_CHARS);
   }
 
   /**
@@ -204,7 +202,7 @@
     if (!text) {
       var ph = document.createElement('span');
       ph.className = 'field__ph';
-      ph.textContent = 'ผลลัพธ์จะแสดงที่นี่';
+      ph.textContent = 'translation';
       els.output.appendChild(ph);
       return;
     }
@@ -238,15 +236,7 @@
     ruleEls = [];
 
     if (!state.output) { els.more.hidden = true; return; }
-    els.more.hidden = false;
-
-    if (!state.rules.length) {
-      var empty = document.createElement('li');
-      empty.className = 'rules__empty';
-      empty.textContent = 'ไม่พบการแปลง';
-      els.rules.appendChild(empty);
-      return;
-    }
+    if (state.rules.length){els.more.hidden = false;}
 
     state.rules.forEach(function (rule, i) {
       els.rules.appendChild(buildRule(rule, i));
@@ -330,11 +320,6 @@
 
   /* ------------------------------------------------------------ request --- */
 
-  function schedule() {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(run, DEBOUNCE_MS);
-  }
-
   function formatValidation(body) {
     var d = body && body.detail;
     if (Array.isArray(d) && d.length) {
@@ -387,6 +372,7 @@
         if (seq !== state.seq) return null;
         if (res.status === 422) {
           return res.json().catch(function () { return null; }).then(function (body) {
+            if (seq !== state.seq) return null;
             setLoading(false);
             setStatus(formatValidation(body), 'error');
             return null;
@@ -421,25 +407,19 @@
 
   /* ------------------------------------------------------------- events --- */
 
+  // Send immediately on every input change; no debounce timer.
   els.input.addEventListener('input', function () {
     updateCount();
-    if (!els.input.value.trim()) {
-      window.clearTimeout(timer);
-      run();                             // clear immediately, no debounce
-      return;
-    }
-    schedule();
+    run();
   });
 
   els.swap.addEventListener('click', function () {
     state.direction = state.direction === 'to_genz' ? 'to_normal' : 'to_genz';
     syncLabels();
-    if (els.input.value.trim()) { window.clearTimeout(timer); run(); }
+    run();
   });
 
-  els.profanity.addEventListener('change', function () {
-    if (els.input.value.trim()) { window.clearTimeout(timer); run(); }
-  });
+  els.profanity.addEventListener('change', run);
 
   els.output.addEventListener('click', function (ev) {
     var target = ev.target;
@@ -455,7 +435,7 @@
 
   syncLabels();
   updateCount();
-  els.apiLabel.textContent = API_BASE;
+  if (els.apiLabel) els.apiLabel.textContent = API_BASE;
   renderOutput();
   renderRules();
 })();
