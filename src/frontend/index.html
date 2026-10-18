@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Z BA MALAI</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="page">
+
+      <header class="head">
+        <img  src="images/long_logo.png" height="67">
+      </header>
+
+      <main class="card">
+        <div class="grid" id="grid">
+          <div>
+            <section class="panel panel--input">
+              <div class="panel__bar">
+                <span class="pill" id="labelInput">NORMAL</span>
+              </div>
+              <textarea id="input" class="field" rows="6" maxlength="500"
+                        placeholder="type something" spellcheck="false"
+                        autocomplete="off" autocapitalize="off"></textarea>
+            </section>
+            <label class="rude" for="profanity">
+                <input type="checkbox" id="profanity">
+                <span>หยาบมั้ย</span>
+            </label>
+        </div>
+          <div class="mid">
+            <button id="swap" class="swap" type="button"
+                    aria-label="สลับทิศทางการแปล" title="swap direction">
+              <img src="images/logo.png" alt="swap button" width="30" height="30">
+            </button>
+          </div>
+
+          <div>
+            <!-- right : result -->
+            <section class="panel panel--result">
+              <div class="panel__bar">
+                <span class="pill" id="labelOutput">GEN Z</span>
+                <span id="spinner" class="spinner" hidden>กำลังแปล…</span>
+              </div>
+              <div id="output" class="field field--out" tabindex="0" aria-live="polite"></div>
+              <p id="status" class="status" hidden></p>
+            </section>
+
+
+            <div class="mid mid--spacer" aria-hidden="true"></div>
+
+            <div class="foot">
+              <section class="more" id="more" hidden>
+                <h2 class="more__title">more translations</h2>
+                <ul class="rules" id="rules"></ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
