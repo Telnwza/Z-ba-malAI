@@ -1,6 +1,8 @@
 # Z-ba-malAI
 📄 [เอกสารโปรเจกต์ (Google Docs)](https://docs.google.com/document/d/1Opkayj902YEVEXJktI4yvAUjIlf8E0QFhtKoZ7hqR8M/edit?usp=drivesdk)
 
+🌐 [เว็บไซต์](https://zbamal.malaysiawest.cloudapp.azure.com/)
+
 API แปลงภาษาไทยปกติ ↔ ภาษา Gen Z ตาม spec `POST /translate` ในเอกสารแผนงาน
 
 ## โครงสร้าง
@@ -13,16 +15,26 @@ Z-ba-malAI/
 │   │   ├── rules.py            # โหลด rule จากชีท 02_PROGRAM ใน data/dataset.xlsx
 │   │   ├── translator.py       # หาคำในประโยค, ตัดด้วยคะแนน, เลือก rule เมื่อชนกัน, แทนที่
 │   │   └── similarity/         # ให้คะแนน rule ด้วย cosine similarity: engine, สคริปต์สร้างเวกเตอร์, .npy + metadata.json
-│   └── frontend/               # หน้าเว็บ (ยังว่าง)
+│   └── frontend/               # หน้าเว็บ HTML/CSS/JS
 ├── data/
 │   └── dataset.xlsx            # dataset ของ rule (ใช้ชีท 02_PROGRAM)
-├── docs/                       # เอกสาร (ยังว่าง)
+├── docs/                       # เอกสาร deployment
 ├── tests/
 │   ├── test_translator.py      # เทสต์ translator และ API
 │   ├── threshold_eval.csv      # ประโยคพร้อมเฉลยว่าคำไหนควร/ไม่ควรแปลง (ร่าง)
 │   └── tune_threshold.py       # ไล่หาค่า THRESHOLD จาก threshold_eval.csv
 └── requirements.txt
 ```
+
+## Demo dataset
+
+Branch `demo` uses the Gemini workbook `thai_chat_genz_dataset_v13.xlsx` downloaded on 2026-10-19: 234 active rules, 1,549 training examples and 552 contrast examples. The original workbook is copied unchanged to `data/dataset.xlsx`. Rebuild the matching vectors whenever this file changes:
+
+```bash
+python src/backend/similarity/build_vector_db.py --excel data/dataset.xlsx
+```
+
+Azure hosting and automatic stop settings are documented in [docs/AZURE_DEPLOYMENT.md](docs/AZURE_DEPLOYMENT.md).
 
 ## รัน (Windows, Python 3.10+)
 

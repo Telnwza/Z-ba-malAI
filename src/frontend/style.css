@@ -282,6 +282,26 @@ textarea.field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--
 .counter--max { color: var(--danger); font-weight: 700; }
 .foot-bar code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
+/* ------------------------------------------------------------ project link */
+.site-footer { display: flex; justify-content: flex-end; margin: 16px 2px 0; }
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-decoration: none;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.github-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
 /* -------------------------------------------------------------- responsive */
 @media (max-width: 680px) {
   body { padding: 22px 14px 40px; }

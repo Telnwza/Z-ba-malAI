@@ -2,11 +2,11 @@
   "config": {
     "model_name": "BAAI/bge-m3",
     "dim": 1024,
-    "n_rules": 154,
-    "n_train": 1039,
-    "n_contrast": 366,
+    "n_rules": 234,
+    "n_train": 1549,
+    "n_contrast": 552,
     "excel": "dataset.xlsx",
-    "built_at": "2026-10-17 11:53:53"
+    "built_at": "2026-10-19 22:36:29"
   },
   "rules": [
     {
@@ -17,7 +17,7 @@
       "content_label": "SFW",
       "source": "ฮ่าๆ / หัวเราะ",
       "target": "555",
-      "variants": "5555 | 555555 | 555…",
+      "variants": "5555 | 555555 | 555… | 565656 | 556565",
       "max_apply": 1
     },
     {
@@ -125,7 +125,7 @@
       "operation": "PHRASE",
       "style_level": 1,
       "content_label": "SFW",
-      "source": "สักครู่ / เดี๋ยวหนึ่ง",
+      "source": "สักครู่ / เดี๋ยวหนึ่ง / ครู่เดียว / แป๊บหนึ่ง",
       "target": "แป๊บ",
       "variants": "แปบ | แปป",
       "max_apply": 1
@@ -215,7 +215,7 @@
       "content_label": "SFW",
       "source": "พูดตรง ๆ / ไม่โกหกนะ / เอาตามจริง",
       "target": "เอาจริง",
-      "variants": "เอาจริงๆ | NGL",
+      "variants": "เอาจริงๆ | NGL | TBH",
       "max_apply": 1
     },
     {
@@ -237,7 +237,7 @@
       "content_label": "SFW",
       "source": "น้อยใจ / กังวล / จิตตกเล็กน้อย",
       "target": "นอย",
-      "variants": "-",
+      "variants": "นอยด์ | นอยอ่ะ",
       "max_apply": 1
     },
     {
@@ -336,7 +336,7 @@
       "content_label": "SFW",
       "source": "จริงหรือ / จริงเหรอ",
       "target": "จริงดิ",
-      "variants": "-",
+      "variants": "จิงดิ | จริงปะ | จริงป่ะ",
       "max_apply": 1
     },
     {
@@ -347,7 +347,7 @@
       "content_label": "SFW",
       "source": "อะไรนะ / หา?",
       "target": "ห๊ะ",
-      "variants": "-",
+      "variants": "ห้ะ | หาา",
       "max_apply": 1
     },
     {
@@ -499,7 +499,7 @@
       "operation": "PHRASE",
       "style_level": 1,
       "content_label": "SFW",
-      "source": "ขอถามหน่อย",
+      "source": "ขอถามหน่อย / ขอสอบถามหน่อย / อยากถามนิดหนึ่ง",
       "target": "ถามหน่อย",
       "variants": "-",
       "max_apply": 1
@@ -554,7 +554,7 @@
       "operation": "TEMPLATE",
       "style_level": 1,
       "content_label": "SFW",
-      "source": "ไม่ต้องการทำ {X} อีกแล้ว",
+      "source": "ไม่ต้องการทำ {X} อีกแล้ว / ไม่ต้องการ {X} แล้ว / เบื่อที่จะ {X} แล้ว",
       "target": "ไม่อยาก {X} แล้ว",
       "variants": "-",
       "max_apply": 1
@@ -1701,6 +1701,886 @@
       "source": "ถูกคนจำนวนมากในโซเชียลรุมวิจารณ์",
       "target": "ทัวร์ลง",
       "variants": "-",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P155",
+      "data_id": "D193",
+      "operation": "TOKEN",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "คุณ / เธอ (เรียกเพื่อนสนิท)",
+      "target": "แก",
+      "variants": "แกร | แกรรร",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P156",
+      "data_id": "D194",
+      "operation": "TOKEN",
+      "style_level": 4,
+      "content_label": "Profanity",
+      "source": "คุณ / เธอ / นาย (สนิทมากหรือหยาบ)",
+      "target": "มึง",
+      "variants": "มุง",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P157",
+      "data_id": "D195",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "พี่สาว / เพื่อนสาว",
+      "target": "พส",
+      "variants": "พส.",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P158",
+      "data_id": "D196",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "น้องสาว",
+      "target": "นส",
+      "variants": "นส.",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P159",
+      "data_id": "D197",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "เหรอ / หรือ (คำลงท้ายคำถาม)",
+      "target": "หรอ",
+      "variants": "อ่อ | เรอะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P160",
+      "data_id": "D198",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ใช่ไหม / ใช่หรือเปล่า",
+      "target": "ใช่มะ",
+      "variants": "ชะ | ช้ะ | ช่ะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P161",
+      "data_id": "D199",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "สิ (คำลงท้ายเร่ง ชวน หรือย้ำ)",
+      "target": "ดิ",
+      "variants": "ซิ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P162",
+      "data_id": "D200",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ใช่ไหมล่ะ / เห็นด้วยไหม / เนอะ",
+      "target": "เนอะ",
+      "variants": "เนาะ | เน้อ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P163",
+      "data_id": "D201",
+      "operation": "PARTICLE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "เลย (คำลงท้ายเน้นอารมณ์)",
+      "target": "เลอ",
+      "variants": "เลยอ่ะ | เลอออ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P164",
+      "data_id": "D202",
+      "operation": "TOKEN",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "จริง ๆ / จริง",
+      "target": "จิง",
+      "variants": "จิงๆ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P165",
+      "data_id": "D203",
+      "operation": "TOKEN",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "อย่างไร / ยังไง",
+      "target": "ไง",
+      "variants": "ยังไงอ่ะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P166",
+      "data_id": "D204",
+      "operation": "TOKEN",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ทำไม (คำถามสั้นต้นประโยค)",
+      "target": "ไม",
+      "variants": "ทำไมอ่ะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P167",
+      "data_id": "D205",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "เท่าไหร่ / เท่าไร / ราคาเท่าไหร่",
+      "target": "เท่าไหร่อ่ะ",
+      "variants": "กี่บาท | เท่าไรอ่ะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P168",
+      "data_id": "D206",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "เหมือนกัน / คิดเหมือนกัน",
+      "target": "เหมือนกันเลย",
+      "variants": "เหมือนกัล | มก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P169",
+      "data_id": "D207",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "นิดหนึ่ง / เล็กน้อย",
+      "target": "นิดนึง",
+      "variants": "นิดเดียว | จี๊ดนึง",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P170",
+      "data_id": "D208",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ทุกครั้งเลย / ตลอดเลย",
+      "target": "ตลอดอ่ะ",
+      "variants": "ทุกทีเลย | ตลอดเลยอ่ะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P171",
+      "data_id": "D209",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "จริง ๆ เลยนะ / นะเนี่ย",
+      "target": "เนี่ย",
+      "variants": "นะเนี่ย",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P172",
+      "data_id": "D210",
+      "operation": "PARTICLE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "จ้ะ / จ๊ะ (คำลงท้ายตอบรับกันเอง)",
+      "target": "จ้า",
+      "variants": "จ้าา | จ้าาา",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P173",
+      "data_id": "D211",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "เข้าใจแล้ว / พอเข้าใจประเด็น",
+      "target": "เก็ต",
+      "variants": "เก็ท | get | เก็ตละ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P174",
+      "data_id": "D212",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "เหนื่อยจนแทบตาย / ไม่รอดแน่ / หมดแรงสู้",
+      "target": "ขิต",
+      "variants": "ตุย | ตุยเย่",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P175",
+      "data_id": "D213",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ปวดหัวกับเรื่องวุ่นวาย / เครียดจนไม่รู้จะทำยังไง",
+      "target": "หัวจะปวด",
+      "variants": "ปวดหัวมากแม่",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P176",
+      "data_id": "D214",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "สวยมากจนตะลึง / ดีมากจนประทับใจสุด ๆ",
+      "target": "จึ้ง",
+      "variants": "ปัง | จึ้งมาก | จึ้งตาแตก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P177",
+      "data_id": "D215",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "พัง / ออกมาแย่ / ไม่เป็นท่า / ล้มเหลว",
+      "target": "บ้ง",
+      "variants": "พังมาก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P178",
+      "data_id": "D216",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ไม่มีเงิน / เงินหมด / เงินไม่พอใช้ช่วงสิ้นเดือน",
+      "target": "ช็อต",
+      "variants": "ถังแตก | กรอบ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P179",
+      "data_id": "D217",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ไม่อ่านแชท / ไม่ยอมตอบข้อความสักที",
+      "target": "ดองแชท",
+      "variants": "ดองไลน์",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P180",
+      "data_id": "D218",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ตัดใจเดินหน้าต่อ / เลิกยึดติดกับเรื่องเดิม",
+      "target": "มูฟออน",
+      "variants": "move on | มูฟอร",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P181",
+      "data_id": "D219",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "เข้านอน / ขอตัวไปนอนพักผ่อน",
+      "target": "ชัตดาวน์",
+      "variants": "วาร์ปไปนอน | นอนละ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P182",
+      "data_id": "D220",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "ร้องไห้หนักมาก / ซึ้งจนกลั้นน้ำตาไม่อยู่",
+      "target": "น้ำตาท่วมจอ",
+      "variants": "ร้องไห้เหมียนหมา | น้ำตาแตก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P183",
+      "data_id": "D221",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ตลกมากจนขำท้องแข็ง / หัวเราะหนักมาก",
+      "target": "ขำปอดโยก",
+      "variants": "ขำจะขิต | ขำท้องแข็ง",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P184",
+      "data_id": "D222",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "คิดมากเกินไป / กังวลล่วงหน้าไปเอง",
+      "target": "โอเวอร์ธิงกิ้ง",
+      "variants": "overthinking | คิดเยอะไปเอง",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P185",
+      "data_id": "D223",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "หมดไฟในการทำงานหรือเรียน / เหนื่อยล้าสะสมจนไม่อยากทำอะไร",
+      "target": "เบิร์นเอาต์",
+      "variants": "burnout | หมดไฟ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P186",
+      "data_id": "D224",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ตัดสินใจซื้อทันที / กดสั่งซื้อตามรีวิว",
+      "target": "ตำ",
+      "variants": "เอฟ | CF | สอย",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P187",
+      "data_id": "D225",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ถูกหลอกให้เสียรู้ / โดนหลอกเอาเปรียบ",
+      "target": "โดนต้ม",
+      "variants": "เสียเหลี่ยม | โดนหลอก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P188",
+      "data_id": "D226",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "หลงเสน่ห์ทันที / ชอบจนถอนตัวไม่ขึ้น",
+      "target": "โดนตก",
+      "variants": "โดนตกเต็มๆ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P189",
+      "data_id": "D227",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "อร่อยมากจนประทับใจสุด ๆ / รสชาติฟินมาก",
+      "target": "อร่อยแสงออกปาก",
+      "variants": "ฟินมาก | bussin'",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P190",
+      "data_id": "D228",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ง่วงนอนมากจนลืมตาไม่ขึ้น",
+      "target": "ตาจะปิด",
+      "variants": "ง่วงไม่ไหว | แบตหมด",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P191",
+      "data_id": "D229",
+      "operation": "PHRASE",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "หิวมากจนทนไม่ไหว / ท้องร้องหนักมาก",
+      "target": "หิวไส้กิ่ว",
+      "variants": "หิวจะบ้า | โหยมาก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P192",
+      "data_id": "D230",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "รอคอยติดตามอย่างใจจดใจจ่อ / รอลุ้นติดขอบจอ",
+      "target": "เกาะขอบจอ",
+      "variants": "รอลุ้นเลย | ปูเสื่อรอ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P193",
+      "data_id": "D231",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "ทำผลงานหรือลุคออกมาได้เป๊ะและน่าประทับใจสุด ๆ",
+      "target": "ชีเสิร์ฟ",
+      "variants": "เสิร์ฟมาก | she served",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P194",
+      "data_id": "D232",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "ดูหรูหรา / ดูแพงมีออร่า / สไตล์สวยหรู",
+      "target": "ติดแกลม",
+      "variants": "แกลม | glam",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P195",
+      "data_id": "D233",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "เริ่ดมาก / โดดเด่นสะดุดตาสุด ๆ (คำชมวัยรุ่น)",
+      "target": "โฮ่ง",
+      "variants": "เอาให้โฮ่ง | โฮ่งมาก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P196",
+      "data_id": "D234",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "จัดเต็มแบบสุด ๆ / ต่อเนื่องเต็มอิ่ม / ผิวดูโกลว์สวย",
+      "target": "ฉ่ำ",
+      "variants": "ฉ่ำมาก | แบบฉ่ำ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P197",
+      "data_id": "D235",
+      "operation": "RESPONSE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "กลั้นเขิน / ฮึบเก็บอาการเขินเวลาโดนชมหรือเจอคนหล่อ",
+      "target": "ฮ๊อป",
+      "variants": "ฮ๊อพ | ฮ้อบ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P198",
+      "data_id": "D236",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "เขินจนยิ้มไม่หุบ / ฟินจนเก็บอาการไม่อยู่",
+      "target": "เหยิน",
+      "variants": "เหยินมาก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P199",
+      "data_id": "D237",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "จะบ้าตาย (โทนบ่นขำ ๆ แบบภาษาลู)",
+      "target": "จะล่าแบ้",
+      "variants": "ล่าแบ้",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P200",
+      "data_id": "D238",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "แต่ละวันในชีวิตที่ต้องเจอเรื่องวุ่น ๆ ไม่ซ้ำกัน",
+      "target": "แต่ละมื้อแต่ละเว็น",
+      "variants": "แต่ละมื้อ แต่ละเว็น",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P201",
+      "data_id": "D239",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "อดทนรอไปก่อนจนกว่าสถานการณ์จะดีขึ้น",
+      "target": "อดทนจนกว่าจะแลนด์",
+      "variants": "ทนจนกว่าจะแลนด์",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P202",
+      "data_id": "D240",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "อธิบายให้ความรู้ / สอนให้เข้าใจข้อมูลที่ถูกต้อง",
+      "target": "เอดูเขต",
+      "variants": "educate",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P203",
+      "data_id": "D241",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "มันดูแปลก ๆ พูดไม่ออก / อธิบายไม่ถูกว่าทำไมไม่ควร",
+      "target": "มันจะไอนั่น",
+      "variants": "ไอนั่น",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P204",
+      "data_id": "D242",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "Insult",
+      "source": "มารยาทแย่มาก / พฤติกรรมต่ำกว่ามาตรฐานสังคม",
+      "target": "ชั้น G",
+      "variants": "พวกชั้น G | ชั้น B2",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P205",
+      "data_id": "D243",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "ทำเรื่องปกติที่ใคร ๆ ก็ทำแต่พูดเหมือนตัวเองทำคนแรก",
+      "target": "คนไทยคนแรก",
+      "variants": "คนไทยคนแรกมาก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P206",
+      "data_id": "D244",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "สวยเป๊ะเกินจริง / ดีงามไร้ที่ติแบบอวยเพื่อน",
+      "target": "เซรั่มนารามาก",
+      "variants": "เซรั่มนารา",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P207",
+      "data_id": "D245",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "พึ่งพาสิ่งศักดิ์สิทธิ์ / ความเชื่อเรื่องดวงและโชคลาภ",
+      "target": "สายมู",
+      "variants": "มูเตลู | มู",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P208",
+      "data_id": "D246",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "น้อง (ใช้เรียกสัตว์เลี้ยงหรือสิ่งของที่น่ารักน่าเอ็นดู)",
+      "target": "น้อน",
+      "variants": "ต้าว | ไอ้ต้าว",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P209",
+      "data_id": "D247",
+      "operation": "TOKEN",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "ต่างประเทศ",
+      "target": "ตปท",
+      "variants": "ตปท.",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P210",
+      "data_id": "D248",
+      "operation": "TOKEN",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "เครื่องสำอาง",
+      "target": "คสอ",
+      "variants": "คสอ.",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P211",
+      "data_id": "D249",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "หน้าไทม์ไลน์ / หน้าฟีดโซเชียล",
+      "target": "ทล",
+      "variants": "TL",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P212",
+      "data_id": "D250",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ผู้ติดตาม / ฟอลโลเวอร์",
+      "target": "ฟลว",
+      "variants": "ฟลว.",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P213",
+      "data_id": "D251",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "บัญชีทางการ / ประกาศอย่างเป็นทางการของค่ายหรือแบรนด์",
+      "target": "อฟช",
+      "variants": "official",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P214",
+      "data_id": "D252",
+      "operation": "RESPONSE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "คุณพระช่วย / โอ้มายก้อด / ตกใจมากไม่น่าเชื่อ",
+      "target": "อมก",
+      "variants": "OMG",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P215",
+      "data_id": "D253",
+      "operation": "PHRASE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "ประสาทเสีย / เรื่องวุ่นวายชวนปวดหัวจนจะบ้า",
+      "target": "ปสด",
+      "variants": "ประสาทแดก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P216",
+      "data_id": "D254",
+      "operation": "RESPONSE",
+      "style_level": 4,
+      "content_label": "Profanity",
+      "source": "แย่แล้ว / ซวยแล้ว / ฉิบหายแล้ว (อุทานเมื่อเกิดเรื่องพลาดหนัก)",
+      "target": "ชห",
+      "variants": "ชิบหาย",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P217",
+      "data_id": "D255",
+      "operation": "RESPONSE",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "อะไรกันเนี่ย / เรื่องบ้าอะไรวะเนี่ย",
+      "target": "วดฟ",
+      "variants": "WTF | อิหยังวะ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P218",
+      "data_id": "D256",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ตอนนี้เลย / ณ ตอนนี้",
+      "target": "RN",
+      "variants": "right now",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P219",
+      "data_id": "D257",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ข้อมูลส่วนตัวเยอะเกินไป / เล่าละเอียดเกินกว่าที่อยากรู้",
+      "target": "TMI",
+      "variants": "-",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P220",
+      "data_id": "D258",
+      "operation": "RESPONSE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ต้องไปแล้วนะ / ขอตัวไปทำธุระก่อน",
+      "target": "GTG",
+      "variants": "G2G",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P221",
+      "data_id": "D259",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ไม่ได้อยู่หน้าจอ / ลุกจากหน้าจอคอมหรือมือถือชั่วคราว",
+      "target": "AFK",
+      "variants": "-",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P222",
+      "data_id": "D260",
+      "operation": "RESPONSE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ดีใจที่ถึงวันศุกร์สักที / ขอบคุณพระเจ้าที่วันนี้เป็นวันศุกร์",
+      "target": "TGIF",
+      "variants": "-",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P223",
+      "data_id": "D261",
+      "operation": "TOKEN",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "วันพรุ่งนี้ (ตัวย่อแชทภาษาอังกฤษ)",
+      "target": "TMR",
+      "variants": "tmr",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P224",
+      "data_id": "D262",
+      "operation": "PHRASE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "ขอบคุณมาก ๆ เลย / ซาบซึ้งใจมากที่ช่วย",
+      "target": "TYSM",
+      "variants": "tysm",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P225",
+      "data_id": "D263",
+      "operation": "SUFFIX_X",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "ต้องการ {X} ด่วนตอนนี้ / อยากหา {X} มาช่วยเดี๋ยวนี้",
+      "target": "{X} ใกล้ฉัน",
+      "variants": "พิกัด {X} ด่วน",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P226",
+      "data_id": "D264",
+      "operation": "SUFFIX_X",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "{X} เต็มที่แบบไม่มีข้อติเลย / {X} เต็มร้อย",
+      "target": "{X} ไม่หัก",
+      "variants": "{X} สิบเต็มสิบ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P227",
+      "data_id": "D265",
+      "operation": "SUFFIX_X",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "{X} มากจนต้านทานไม่ไหว / {X} จนห้ามใจไม่อยู่",
+      "target": "{X} เกินต้าน",
+      "variants": "{X} เกินต้านมาก",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P228",
+      "data_id": "D266",
+      "operation": "TEMPLATE",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "แอบ {X} นิดหน่อย / พอได้ {X} เล็กน้อย",
+      "target": "แอบ {X} เบาๆ",
+      "variants": "{X} เบาๆ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P229",
+      "data_id": "D267",
+      "operation": "PREFIX_X",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "คนที่ชอบ {X} มากเป็นพิเศษ / กลุ่มคนรัก {X}",
+      "target": "สาย {X}",
+      "variants": "ชาว {X}",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P230",
+      "data_id": "D268",
+      "operation": "PREFIX_X",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "เจ้า {X} ที่น่ารักน่าเอ็นดู",
+      "target": "ไอ้ต้าว {X}",
+      "variants": "ต้าว {X}",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P231",
+      "data_id": "D269",
+      "operation": "SUFFIX_X",
+      "style_level": 1,
+      "content_label": "SFW",
+      "source": "{X} ต่อเนื่องไม่หยุด / {X} ติด ๆ กันหลายครั้ง",
+      "target": "{X} รัวๆ",
+      "variants": "{X} ยาวๆ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P232",
+      "data_id": "D270",
+      "operation": "SUFFIX_X",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "แค่ {X} เบา ๆ พอหอมปากหอมคอ",
+      "target": "{X} กรุบๆ",
+      "variants": "{X} พอกรุบ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P233",
+      "data_id": "D271",
+      "operation": "SUFFIX_X",
+      "style_level": 2,
+      "content_label": "SFW",
+      "source": "{X} แบบชัดเจนสุด ๆ จนใครก็ดูออก",
+      "target": "{X} แบบตะโกน",
+      "variants": "{X} สุดใจ",
+      "max_apply": 1
+    },
+    {
+      "rule_id": "P234",
+      "data_id": "D272",
+      "operation": "SUFFIX_X",
+      "style_level": 3,
+      "content_label": "SFW",
+      "source": "บอกว่าจะ {X} แต่ไม่เห็นทำสักที / เมื่อไหร่จะได้ {X} จริง",
+      "target": "{X} กี่โมง",
+      "variants": "จะ {X} กี่โมง",
       "max_apply": 1
     }
   ],
@@ -3086,6 +3966,16 @@
       "kind": "train"
     },
     {
+      "sentence": "รีบกลับบ้านกันเถอะ ฝนจะตกแล้ว",
+      "rule_id": "P040",
+      "kind": "train"
+    },
+    {
+      "sentence": "เลิกคิดมากเถอะ เรื่องมันผ่านไปแล้ว",
+      "rule_id": "P040",
+      "kind": "train"
+    },
+    {
       "sentence": "เธอถึงบ้านแล้วบอกด้วยนะ",
       "rule_id": "P041",
       "kind": "train"
@@ -3106,6 +3996,16 @@
       "kind": "train"
     },
     {
+      "sentence": "เธอกินข้าวเย็นหรือยัง",
+      "rule_id": "P041",
+      "kind": "train"
+    },
+    {
+      "sentence": "อันนี้เราซื้อมาฝากเธอนะ",
+      "rule_id": "P041",
+      "kind": "train"
+    },
+    {
       "sentence": "ร้านนี้อร่อยมาก ต้องมาซ้ำ",
       "rule_id": "P042",
       "kind": "train"
@@ -3122,6 +4022,16 @@
     },
     {
       "sentence": "รูปนี้น่ารักมาก ชอบสุด ๆ",
+      "rule_id": "P042",
+      "kind": "train"
+    },
+    {
+      "sentence": "อากาศวันนี้ดีมาก อยากออกไปเดินเล่น",
+      "rule_id": "P042",
+      "kind": "train"
+    },
+    {
+      "sentence": "คิดถึงเพื่อนมากไม่ได้เจอกันนาน",
       "rule_id": "P042",
       "kind": "train"
     },
@@ -3511,6 +4421,16 @@
       "kind": "train"
     },
     {
+      "sentence": "อ๋อ นึกออกแล้วว่าลืมวางไว้ตรงไหน",
+      "rule_id": "P053",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ๋อ มิน่าล่ะทำไมวันนี้รถติด",
+      "rule_id": "P053",
+      "kind": "train"
+    },
+    {
       "sentence": "รีวิวนี้ชมเกินจริงจนดูไม่น่าเชื่อ",
       "rule_id": "P054",
       "kind": "train"
@@ -3597,6 +4517,16 @@
     },
     {
       "sentence": "ฉันจะกลับก่อน เดี๋ยวพรุ่งนี้ค่อยคุย",
+      "rule_id": "P056",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาเพิ่งส่งข้อความมาเมื่อกี้",
+      "rule_id": "P056",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฉันยังไม่แน่ใจเลยว่าจะไปทันไหม",
       "rule_id": "P056",
       "kind": "train"
     },
@@ -5501,6 +6431,16 @@
       "kind": "train"
     },
     {
+      "sentence": "โอเค เจอกันหน้าห้างนะ",
+      "rule_id": "P108",
+      "kind": "train"
+    },
+    {
+      "sentence": "โอเค เดี๋ยวเราจัดการต่อเอง",
+      "rule_id": "P108",
+      "kind": "train"
+    },
+    {
       "sentence": "เดี๋ยวส่งให้",
       "rule_id": "P109",
       "kind": "train"
@@ -5517,6 +6457,16 @@
     },
     {
       "sentence": "เดี๋ยวกลับมา",
+      "rule_id": "P109",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดี๋ยวเราโทรตามให้เอง",
+      "rule_id": "P109",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดี๋ยวแวะซื้อน้ำเข้าไปฝากนะ",
       "rule_id": "P109",
       "kind": "train"
     },
@@ -5641,6 +6591,16 @@
       "kind": "train"
     },
     {
+      "sentence": "ขี้เกียจพิมพ์ยาว ๆ โทรคุยเลยดีกว่า",
+      "rule_id": "P113",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันหยุดแบบนี้ขี้เกียจทำอาหารเองมาก",
+      "rule_id": "P113",
+      "kind": "train"
+    },
+    {
       "sentence": "พรุ่งนี้ว่างไหม",
       "rule_id": "P114",
       "kind": "train"
@@ -5657,6 +6617,16 @@
     },
     {
       "sentence": "พรุ่งนี้ต้องตื่นเช้า",
+      "rule_id": "P114",
+      "kind": "train"
+    },
+    {
+      "sentence": "พรุ่งนี้มีนัดกินข้าวกับที่บ้าน",
+      "rule_id": "P114",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดี๋ยวพรุ่งนี้ส่งเอกสารตัวจริงไปให้",
       "rule_id": "P114",
       "kind": "train"
     },
@@ -5681,6 +6651,16 @@
       "kind": "train"
     },
     {
+      "sentence": "อยู่คนเดียวแล้วคิดถึงบรรยากาศเก่า ๆ",
+      "rule_id": "P115",
+      "kind": "train"
+    },
+    {
+      "sentence": "คิดถึงอาหารฝีมือแม่มาก",
+      "rule_id": "P115",
+      "kind": "train"
+    },
+    {
       "sentence": "แอคเคานต์นี้เป็นของใคร",
       "rule_id": "P116",
       "kind": "train"
@@ -5697,6 +6677,16 @@
     },
     {
       "sentence": "แอคเคานต์เก่าเข้าไม่ได้แล้ว",
+      "rule_id": "P116",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพิ่งเปิดแอคเคานต์ใหม่ไว้ลงรูปถ่าย",
+      "rule_id": "P116",
+      "kind": "train"
+    },
+    {
+      "sentence": "แอคเคานต์ร้านค้าตอบข้อความไวมาก",
       "rule_id": "P116",
       "kind": "train"
     },
@@ -6181,6 +7171,16 @@
       "kind": "train"
     },
     {
+      "sentence": "รับทราบค่ะ เดี๋ยวประสานงานต่อให้นะคะ",
+      "rule_id": "P131",
+      "kind": "train"
+    },
+    {
+      "sentence": "เรียบร้อยแล้วค่ะ ลองเช็กไฟล์ดูได้เลย",
+      "rule_id": "P131",
+      "kind": "train"
+    },
+    {
       "sentence": "เขาคงจะมาช่วงเย็น",
       "rule_id": "P132",
       "kind": "train"
@@ -6271,6 +7271,16 @@
       "kind": "train"
     },
     {
+      "sentence": "จะจ่ายเงินสดหรือโอนผ่านแอป",
+      "rule_id": "P134",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตกลงจะดูหนังหรือไปคาเฟ่ก่อน",
+      "rule_id": "P134",
+      "kind": "train"
+    },
+    {
       "sentence": "ไปกินข้าวกับเพื่อน",
       "rule_id": "P135",
       "kind": "train"
@@ -6287,6 +7297,16 @@
     },
     {
       "sentence": "เขานั่งกับเพื่อนในห้อง",
+      "rule_id": "P135",
+      "kind": "train"
+    },
+    {
+      "sentence": "เย็นนี้จะไปเดินห้างกับพี่สาว",
+      "rule_id": "P135",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชอบกินขนมปังกับกาแฟดำตอนเช้า",
       "rule_id": "P135",
       "kind": "train"
     },
@@ -6347,6 +7367,16 @@
     },
     {
       "sentence": "อยากเล่าประสบการณ์ตอนฝึกงาน",
+      "rule_id": "P137",
+      "kind": "train"
+    },
+    {
+      "sentence": "มีประสบการณ์ตรงเรื่องการย้ายหอมาเล่าให้ฟัง",
+      "rule_id": "P137",
+      "kind": "train"
+    },
+    {
+      "sentence": "ประสบการณ์เที่ยวคนเดียวครั้งแรกสนุกกว่าที่คิด",
       "rule_id": "P137",
       "kind": "train"
     },
@@ -6899,6 +7929,2406 @@
       "sentence": "หลังข่าวแพร่ออกไป คนออนไลน์หลายกลุ่มรุมวิจารณ์เรื่องเดียวกัน",
       "rule_id": "P154",
       "kind": "train"
+    },
+    {
+      "sentence": "วันนี้เธอจะไปกินข้าวที่ไหน",
+      "rule_id": "P155",
+      "kind": "train"
+    },
+    {
+      "sentence": "คุณส่งไฟล์งานให้เราหรือยัง",
+      "rule_id": "P155",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอเห็นข่าวที่เพิ่งขึ้นฟีดไหม",
+      "rule_id": "P155",
+      "kind": "train"
+    },
+    {
+      "sentence": "พรุ่งนี้คุณว่างมาเจอกันหรือเปล่า",
+      "rule_id": "P155",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอช่วยดูโจทย์ข้อนี้ให้หน่อยได้ไหม",
+      "rule_id": "P155",
+      "kind": "train"
+    },
+    {
+      "sentence": "เราซื้อขนมมาฝากเธอนะวางอยู่บนโต๊ะ",
+      "rule_id": "P155",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอส่งไฟล์ให้ฉันหรือยัง",
+      "rule_id": "P156",
+      "kind": "train"
+    },
+    {
+      "sentence": "นายจะบ้าเหรอทำไมทำแบบนั้น",
+      "rule_id": "P156",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้คุณจะกลับบ้านกี่โมง",
+      "rule_id": "P156",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธออย่าลืมเอาสายชาร์จมาคืนเราด้วย",
+      "rule_id": "P156",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมื่อคืนนายได้ดูบอลคู่ดึกไหม",
+      "rule_id": "P156",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอไปกินร้านนั้นมาแล้วเป็นยังไงบ้าง",
+      "rule_id": "P156",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ไปเดินห้างกับพี่สาวมา",
+      "rule_id": "P157",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนสาวชวนไปคาเฟ่เปิดใหม่แถวสยาม",
+      "rule_id": "P157",
+      "kind": "train"
+    },
+    {
+      "sentence": "พี่สาวคนนี้แต่งตัวเก่งมาก",
+      "rule_id": "P157",
+      "kind": "train"
+    },
+    {
+      "sentence": "นัดกินชาบูกับแก๊งเพื่อนสาวเย็นนี้",
+      "rule_id": "P157",
+      "kind": "train"
+    },
+    {
+      "sentence": "พี่สาวที่ออฟฟิศใจดีซื้อกาแฟมาฝาก",
+      "rule_id": "P157",
+      "kind": "train"
+    },
+    {
+      "sentence": "ปรึกษาปัญหาหัวใจกับเพื่อนสาวทั้งคืน",
+      "rule_id": "P157",
+      "kind": "train"
+    },
+    {
+      "sentence": "น้องสาวคนนี้น่ารักและพูดเก่งมาก",
+      "rule_id": "P158",
+      "kind": "train"
+    },
+    {
+      "sentence": "พาน้องสาวไปซื้อของเตรียมเปิดเทอม",
+      "rule_id": "P158",
+      "kind": "train"
+    },
+    {
+      "sentence": "น้องสาวในกลุ่มเพิ่งได้งานใหม่",
+      "rule_id": "P158",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ต้องไปรับน้องสาวที่สถานีรถไฟฟ้า",
+      "rule_id": "P158",
+      "kind": "train"
+    },
+    {
+      "sentence": "น้องสาวส่งรูปร้านขนมมาป้ายยาอีกแล้ว",
+      "rule_id": "P158",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซื้อของขวัญวันเกิดให้น้องสาว",
+      "rule_id": "P158",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาจะย้ายงานเดือนหน้าจริงเหรอ",
+      "rule_id": "P159",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ร้านปิดเร็วเหรอ",
+      "rule_id": "P159",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอไม่ได้ไปงานเมื่อวานเหรอ",
+      "rule_id": "P159",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องส่งรายงานภายในเช้านี้เลยเหรอ",
+      "rule_id": "P159",
+      "kind": "train"
+    },
+    {
+      "sentence": "อันนี้ลดราคาแล้วจริงเหรอ",
+      "rule_id": "P159",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาพูดแบบนั้นกับเธอจริงเหรอ",
+      "rule_id": "P159",
+      "kind": "train"
+    },
+    {
+      "sentence": "พรุ่งนี้วันหยุดราชการใช่ไหม",
+      "rule_id": "P160",
+      "kind": "train"
+    },
+    {
+      "sentence": "อันนี้เป็นไฟล์เวอร์ชันล่าสุดใช่หรือเปล่า",
+      "rule_id": "P160",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอจองโต๊ะร้านอาหารไว้แล้วใช่ไหม",
+      "rule_id": "P160",
+      "kind": "train"
+    },
+    {
+      "sentence": "ห้องประชุมอยู่ชั้นสามใช่หรือเปล่า",
+      "rule_id": "P160",
+      "kind": "train"
+    },
+    {
+      "sentence": "เราต้องลงสถานีหน้าใช่ไหม",
+      "rule_id": "P160",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมื่อกี้เธอเป็นคนโทรมาใช่หรือเปล่า",
+      "rule_id": "P160",
+      "kind": "train"
+    },
+    {
+      "sentence": "ลองกดปุ่มนี้ดูสิเผื่อเครื่องติด",
+      "rule_id": "P161",
+      "kind": "train"
+    },
+    {
+      "sentence": "รีบเดินตามมาสิเดี๋ยวไม่ทันรถ",
+      "rule_id": "P161",
+      "kind": "train"
+    },
+    {
+      "sentence": "บอกมาสิว่าเมื่อวานไปไหนมา",
+      "rule_id": "P161",
+      "kind": "train"
+    },
+    {
+      "sentence": "ลองชิมคำนี้ดูสิอร่อยมากนะ",
+      "rule_id": "P161",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ้าว่างก็มาด้วยกันสิสนุกแน่",
+      "rule_id": "P161",
+      "kind": "train"
+    },
+    {
+      "sentence": "ส่งรูปให้ดูหน่อยสิอยากเห็น",
+      "rule_id": "P161",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้อากาศดีมากเลยใช่ไหมล่ะ",
+      "rule_id": "P162",
+      "kind": "train"
+    },
+    {
+      "sentence": "ร้านนี้ทำอาหารอร่อยทุกอย่างเลยเห็นด้วยไหม",
+      "rule_id": "P162",
+      "kind": "train"
+    },
+    {
+      "sentence": "เวลาผ่านไปไวมากเลยใช่ไหมล่ะ",
+      "rule_id": "P162",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพลงใหม่ฟังสบายหูกว่าที่คิดเห็นด้วยไหม",
+      "rule_id": "P162",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ้าได้หยุดยาวอีกสักวันก็คงดีใช่ไหมล่ะ",
+      "rule_id": "P162",
+      "kind": "train"
+    },
+    {
+      "sentence": "ราคาเท่านี้ถือว่าคุ้มมากเลยเห็นด้วยไหม",
+      "rule_id": "P162",
+      "kind": "train"
+    },
+    {
+      "sentence": "งานวันนี้เหนื่อยมากเลย",
+      "rule_id": "P163",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชุดนี้ใส่แล้วดูดีมากเลย",
+      "rule_id": "P163",
+      "kind": "train"
+    },
+    {
+      "sentence": "รอนานจนหิวข้าวมากเลย",
+      "rule_id": "P163",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านจบแล้วชอบตอนจบมากเลย",
+      "rule_id": "P163",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้รถติดหนักสุด ๆ ไปเลย",
+      "rule_id": "P163",
+      "kind": "train"
+    },
+    {
+      "sentence": "คิดถึงบรรยากาศตอนไปเที่ยวด้วยกันจังเลย",
+      "rule_id": "P163",
+      "kind": "train"
+    },
+    {
+      "sentence": "เรื่องนี้ฉันพูดจริง ๆ ไม่ได้ล้อเล่น",
+      "rule_id": "P164",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้อากาศร้อนจริง ๆ",
+      "rule_id": "P164",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาเก่งเรื่องการเขียนโปรแกรมจริง",
+      "rule_id": "P164",
+      "kind": "train"
+    },
+    {
+      "sentence": "ร้านนี้ให้เยอะและคุ้มราคาจริง ๆ",
+      "rule_id": "P164",
+      "kind": "train"
+    },
+    {
+      "sentence": "เราลืมเรื่องนัดวันนี้ไปจริง ๆ ขอโทษด้วย",
+      "rule_id": "P164",
+      "kind": "train"
+    },
+    {
+      "sentence": "อันนี้ใช้งานง่ายจริงตามที่รีวิวบอก",
+      "rule_id": "P164",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตกลงเรื่องนี้จะเอาอย่างไรต่อดี",
+      "rule_id": "P165",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ไปสัมภาษณ์งานมาเป็นยังไงบ้าง",
+      "rule_id": "P165",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาตอบกลับมาว่าอย่างไรบ้าง",
+      "rule_id": "P165",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ้าฝนตกเราจะเดินทางกันยังไง",
+      "rule_id": "P165",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอคิดว่าแผนนี้เป็นอย่างไรบ้าง",
+      "rule_id": "P165",
+      "kind": "train"
+    },
+    {
+      "sentence": "สรุปแล้วผลคะแนนออกมาเป็นยังไง",
+      "rule_id": "P165",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำไมวันนี้กลับบ้านเร็วจัง",
+      "rule_id": "P166",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำไมเมื่อกี้ไม่รับโทรศัพท์เรา",
+      "rule_id": "P166",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำไมร้านนี้คนต่อคิวเยอะขนาดนี้",
+      "rule_id": "P166",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำไมไฟล์นี้เปิดในมือถือไม่ได้",
+      "rule_id": "P166",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำไมเธอไม่บอกเราก่อนว่าจะไม่มา",
+      "rule_id": "P166",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำไมวันนี้ง่วงนอนตั้งแต่บ่ายเลย",
+      "rule_id": "P166",
+      "kind": "train"
+    },
+    {
+      "sentence": "รองเท้าคู่นี้ซื้อมาเท่าไหร่",
+      "rule_id": "P167",
+      "kind": "train"
+    },
+    {
+      "sentence": "ค่าส่งด่วนคิดราคาเท่าไร",
+      "rule_id": "P167",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องโอนเงินหารค่าข้าวคนละเท่าไหร่",
+      "rule_id": "P167",
+      "kind": "train"
+    },
+    {
+      "sentence": "บัตรคอนเสิร์ตรอบนี้ราคาเท่าไหร่",
+      "rule_id": "P167",
+      "kind": "train"
+    },
+    {
+      "sentence": "ค่าเช่าหอพักแถวนั้นเดือนละเท่าไร",
+      "rule_id": "P167",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซ่อมหน้าจอมือถือหมดไปเท่าไหร่",
+      "rule_id": "P167",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฉันก็คิดเหมือนกันว่าวันนี้รถต้องติด",
+      "rule_id": "P168",
+      "kind": "train"
+    },
+    {
+      "sentence": "เราก็ชอบกินเมนูนี้เหมือนกัน",
+      "rule_id": "P168",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตอนแรกเราก็งงเหมือนกันว่าต้องกดตรงไหน",
+      "rule_id": "P168",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทางนี้ก็ยังทำรายงานไม่เสร็จเหมือนกัน",
+      "rule_id": "P168",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฉันก็อยากไปเที่ยวทะเลเหมือนกัน",
+      "rule_id": "P168",
+      "kind": "train"
+    },
+    {
+      "sentence": "เราก็กำลังหาข้อมูลเรื่องนี้อยู่เหมือนกัน",
+      "rule_id": "P168",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอเวลาแก้ไขสไลด์ตรงนี้นิดหนึ่งนะ",
+      "rule_id": "P169",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้รู้สึกปวดหัวนิดหนึ่งเลยอยากพัก",
+      "rule_id": "P169",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วยเขยิบเก้าอี้ไปทางซ้ายเล็กน้อยได้ไหม",
+      "rule_id": "P169",
+      "kind": "train"
+    },
+    {
+      "sentence": "เติมน้ำเชื่อมเพิ่มอีกนิดหนึ่งน่าจะอร่อยพอดี",
+      "rule_id": "P169",
+      "kind": "train"
+    },
+    {
+      "sentence": "มีเรื่องอยากปรึกษานิดหนึ่งพอมีเวลาไหม",
+      "rule_id": "P169",
+      "kind": "train"
+    },
+    {
+      "sentence": "รสชาติเผ็ดไปเล็กน้อยแต่โดยรวมอร่อยดี",
+      "rule_id": "P169",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอจะออกจากบ้านทีไรฝนตกทุกครั้งเลย",
+      "rule_id": "P170",
+      "kind": "train"
+    },
+    {
+      "sentence": "เวลาลืมเอาร่มมาแดดจะแรงสลับฝนตกตลอดเลย",
+      "rule_id": "P170",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขามาสายเวลานัดเช้าทุกครั้งเลย",
+      "rule_id": "P170",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอรีบทีไรต้องติดไฟแดงนานทุกครั้งเลย",
+      "rule_id": "P170",
+      "kind": "train"
+    },
+    {
+      "sentence": "สั่งร้านนี้ทีไรได้ของช้าตลอดเลย",
+      "rule_id": "P170",
+      "kind": "train"
+    },
+    {
+      "sentence": "เวลาตั้งใจจะเก็บเงินมักมีของลดราคาทุกครั้งเลย",
+      "rule_id": "P170",
+      "kind": "train"
+    },
+    {
+      "sentence": "กว่าจะเคลียร์งานวันนี้เสร็จเหนื่อยแทบแย่จริง ๆ เลยนะ",
+      "rule_id": "P171",
+      "kind": "train"
+    },
+    {
+      "sentence": "หามตั้งนานที่แท้แว่นตาอยู่บนหัวตัวเองนะเนี่ย",
+      "rule_id": "P171",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไม่คิดเลยว่าคนจะเยอะขนาดนี้จริง ๆ เลยนะ",
+      "rule_id": "P171",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้อากาศร้อนกว่าเมื่อวานอีกนะเนี่ย",
+      "rule_id": "P171",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดินหลงทางในห้างตั้งครึ่งชั่วโมงเลยนะเนี่ย",
+      "rule_id": "P171",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพิ่งรู้ว่าเขาสองคนเป็นเพื่อนสมัยเรียนกันนะเนี่ย",
+      "rule_id": "P171",
+      "kind": "train"
+    },
+    {
+      "sentence": "รับทราบจ้ะ เดี๋ยวจัดการให้นะ",
+      "rule_id": "P172",
+      "kind": "train"
+    },
+    {
+      "sentence": "โอเคจ้ะ เจอกันที่ร้านตอนหกโมงเย็น",
+      "rule_id": "P172",
+      "kind": "train"
+    },
+    {
+      "sentence": "ได้เลยจ้ะ เดี๋ยวเราแวะซื้อเข้าไปให้",
+      "rule_id": "P172",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอบคุณมากนะจ๊ะสำหรับของฝาก",
+      "rule_id": "P172",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดินทางปลอดภัยนะจ๊ะถึงแล้วทักมาบอกด้วย",
+      "rule_id": "P172",
+      "kind": "train"
+    },
+    {
+      "sentence": "เสร็จเรียบร้อยแล้วจ้ะส่งไฟล์ให้ในแชทแล้วนะ",
+      "rule_id": "P172",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฟังเขาอธิบายรอบเดียวก็เข้าใจประเด็นทันที",
+      "rule_id": "P173",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตอนแรกงงแต่พอดูภาพประกอบก็เข้าใจแล้ว",
+      "rule_id": "P173",
+      "kind": "train"
+    },
+    {
+      "sentence": "โอเค ฉันเข้าใจแล้วว่าทำไมระบบถึงแจ้งเตือนแบบนั้น",
+      "rule_id": "P173",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านสรุปหน้านี้แล้วเข้าใจเนื้อหาขึ้นเยอะ",
+      "rule_id": "P173",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอเข้าใจที่อาจารย์เพิ่งอธิบายเมื่อกี้ไหม",
+      "rule_id": "P173",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอเห็นตัวอย่างจริงก็เข้าใจวิธีใช้งานทันที",
+      "rule_id": "P173",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดินขึ้นบันไดห้า층รวดเดียวเหนื่อยจนแทบตาย",
+      "rule_id": "P174",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจอแดดเมืองไทยตอนบ่ายสองเข้าไปแทบไม่รอด",
+      "rule_id": "P174",
+      "kind": "train"
+    },
+    {
+      "sentence": "ปั่นงานโต้รุ่งสามคืนติดกันร่างกายจะไม่รอดแล้ว",
+      "rule_id": "P174",
+      "kind": "train"
+    },
+    {
+      "sentence": "ออกกำลังกายเซตสุดท้ายเหนื่อยจนแทบขาดใจ",
+      "rule_id": "P174",
+      "kind": "train"
+    },
+    {
+      "sentence": "วิ่งไปให้ทันรถไฟขบวนสุดท้ายเหนื่อยแทบตาย",
+      "rule_id": "P174",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นตารางสอบสัปดาห์หน้าแล้วรู้สึกไม่รอดแน่",
+      "rule_id": "P174",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจอลูกค้าสั่งแก้กลับไปเป็นแบบแรกอีกแล้วปวดหัวมาก",
+      "rule_id": "P175",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องคอยเคลียร์ปัญหาเดิมซ้ำ ๆ จนเครียดไม่รู้จะทำยังไง",
+      "rule_id": "P175",
+      "kind": "train"
+    },
+    {
+      "sentence": "ระบบล่มตอนกำลังจะกดส่งงานพอดีชวนปวดหัวจริง ๆ",
+      "rule_id": "P175",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฟังคนสองกลุ่มเถียงกันไม่จบสักทีจนรู้สึกวุ่นวายใจ",
+      "rule_id": "P175",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตารางงานรวนเพราะเลื่อนนัดกะทันหันปวดหัวกับเรื่องนี้มาก",
+      "rule_id": "P175",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นสภาพห้องที่เพื่อนทำรกไว้แล้วปวดหัวเลย",
+      "rule_id": "P175",
+      "kind": "train"
+    },
+    {
+      "sentence": "ภาพถ่ายเซตนี้สีสวยคมชัดจนน่าประทับใจมาก",
+      "rule_id": "P176",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตกแต่งร้านใหม่แล้วออกมาสวยสะดุดตาสุด ๆ",
+      "rule_id": "P176",
+      "kind": "train"
+    },
+    {
+      "sentence": "รสชาติอาหารจานเด็ดของร้านนี้ดีมากจนตะลึง",
+      "rule_id": "P176",
+      "kind": "train"
+    },
+    {
+      "sentence": "วิวพระอาทิตย์ตกบนดอยวันนี้สวยจนประทับใจไม่ลืม",
+      "rule_id": "P176",
+      "kind": "train"
+    },
+    {
+      "sentence": "งานฝีมือชิ้นนี้เก็บรายละเอียดได้สวยและดูดีมาก",
+      "rule_id": "P176",
+      "kind": "train"
+    },
+    {
+      "sentence": "เปิดกล่องของขวัญมาเจอของจริงแล้วสวยประทับใจสุด ๆ",
+      "rule_id": "P176",
+      "kind": "train"
+    },
+    {
+      "sentence": "ลองทำเค้กเองครั้งแรกแต่ลืมใส่ผงฟูออกมาพังเลย",
+      "rule_id": "P177",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซื้อเสื้อผ้าออนไลน์ไม่วัดขนาดก่อนใส่แล้วออกมาแย่มาก",
+      "rule_id": "P177",
+      "kind": "train"
+    },
+    {
+      "sentence": "แผนเที่ยวที่วางไว้พังไม่เป็นท่าเพราะพายุเข้า",
+      "rule_id": "P177",
+      "kind": "train"
+    },
+    {
+      "sentence": "แต่งหน้าโทนนี้แล้วไม่เข้ากับผิวเลยดูพังมาก",
+      "rule_id": "P177",
+      "kind": "train"
+    },
+    {
+      "sentence": "ระบบจองตั๋วล่มตั้งแต่นาทีแรกงานออกมาแย่สุด ๆ",
+      "rule_id": "P177",
+      "kind": "train"
+    },
+    {
+      "sentence": "พยายามตัดผมหน้าม้าด้วยตัวเองแต่ผลลัพธ์พังมาก",
+      "rule_id": "P177",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงปลายเดือนแบบนี้เงินในบัญชีแทบไม่เหลือแล้ว",
+      "rule_id": "P178",
+      "kind": "train"
+    },
+    {
+      "sentence": "จ่ายค่าซ่อมรถก้อนใหญ่ไปจนตอนนี้ไม่มีเงินติดตัวเลย",
+      "rule_id": "P178",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดือนนี้ซื้อของเพลินไปหน่อยจนเงินไม่พอใช้",
+      "rule_id": "P178",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องงดกินบุฟเฟต์ก่อนเพราะช่วงนี้การเงินฝืดมาก",
+      "rule_id": "P178",
+      "kind": "train"
+    },
+    {
+      "sentence": "ยังไม่ทันกลางเดือนแต่เงินค่าขนมใกล้หมดแล้ว",
+      "rule_id": "P178",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงนี้รายจ่ายเยอะติดกันจนเงินหมุนไม่ทัน",
+      "rule_id": "P178",
+      "kind": "train"
+    },
+    {
+      "sentence": "ส่งข้อความไปถามตั้งแต่เมื่อวานแต่เขายังไม่เปิดอ่านเลย",
+      "rule_id": "P179",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนคนนี้ชอบปล่อยข้อความทิ้งไว้หลายวันกว่าจะตอบ",
+      "rule_id": "P179",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นออนโซเชียลอยู่แต่ไม่ยอมกดเข้ามาอ่านข้อความเราสักที",
+      "rule_id": "P179",
+      "kind": "train"
+    },
+    {
+      "sentence": "ข้อความค้างอยู่ในกล่องสนทนาเป็นสิบอันเพราะยังไม่ได้เปิดอ่าน",
+      "rule_id": "P179",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทักไปเรื่องนัดกินข้าวแต่โดนปล่อยข้อความค้างไว้ตั้งแต่เช้า",
+      "rule_id": "P179",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอโทษที่ตอบช้าพอดีงานยุ่งเลยไม่ได้เปิดอ่านข้อความเลย",
+      "rule_id": "P179",
+      "kind": "train"
+    },
+    {
+      "sentence": "เรื่องที่ผิดพลาดไปแล้วก็ปล่อยวางและเดินหน้าต่อเถอะ",
+      "rule_id": "P180",
+      "kind": "train"
+    },
+    {
+      "sentence": "เลิกกันมาหลายเดือนแล้วแต่เขายังตัดใจไม่ได้สักที",
+      "rule_id": "P180",
+      "kind": "train"
+    },
+    {
+      "sentence": "กินของอร่อยเสร็จแล้วยังประทับใจจนเลิกคิดถึงร้านนั้นไม่ได้",
+      "rule_id": "P180",
+      "kind": "train"
+    },
+    {
+      "sentence": "สอบวิชานี้เสร็จแล้วต้องรีบเปลี่ยนไปอ่านวิชาต่อไปทันที",
+      "rule_id": "P180",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถึงเวลาต้องตัดใจจากความสัมพันธ์ที่ไม่ชัดเจนแล้ว",
+      "rule_id": "P180",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูคอนเสิร์ตจบไปสามวันแล้วยังพาตัวเองออกจากบรรยากาศในงานไม่ได้",
+      "rule_id": "P180",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ทำงานใช้พลังงานหมดเกลี้ยงแล้วขอตัวไปนอนก่อนนะ",
+      "rule_id": "P181",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตาจะปิดแล้วขออนุญาตไปนอนพักผ่อนก่อน",
+      "rule_id": "P181",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถึงเตียงปุ๊บพร้อมหลับทันทีไม่ต้องปลุกนะ",
+      "rule_id": "P181",
+      "kind": "train"
+    },
+    {
+      "sentence": "คืนนี้ง่วงมากขอปิดสวิตช์ตัวเองไปนอนเร็วหนึ่งวัน",
+      "rule_id": "P181",
+      "kind": "train"
+    },
+    {
+      "sentence": "เคลียร์งานเสร็จหมดแล้วได้เวลาเข้านอนสักที",
+      "rule_id": "P181",
+      "kind": "train"
+    },
+    {
+      "sentence": "ร่างกายต้องการการพักผ่อนขอตัวไปนอนก่อนนะทุกคน",
+      "rule_id": "P181",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูหนังฉากบอกลาตอนจบแล้วซึ้งจนร้องไห้หนักมาก",
+      "rule_id": "P182",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านนิยายบทสุดท้ายแล้วกลั้นน้ำตาไว้ไม่อยู่จริง ๆ",
+      "rule_id": "P182",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฟังเพลงนี้ทีไรก็อินจนน้ำตาไหลออกมาทุกที",
+      "rule_id": "P182",
+      "kind": "train"
+    },
+    {
+      "sentence": "คลิปเซอร์ไพรส์ครอบครัวทำเอาคนดูซึ้งจนร้องไห้ตาม",
+      "rule_id": "P182",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นตัวละครที่รักเสียสละแล้วร้องไห้สะอึกสะอื้นหนักมาก",
+      "rule_id": "P182",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซีรีส์ตอนนี้ดราม่าหนักจนต้องหยิบทิชชู่มาซับน้ำตาตลอด",
+      "rule_id": "P182",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูคลิปรายการเทปนี้กี่รอบก็ตลกจนขำท้องแข็ง",
+      "rule_id": "P183",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนเล่าเรื่องเปิ่น ๆ ของตัวเองซะตลกมากจนหยุดขำไม่ได้",
+      "rule_id": "P183",
+      "kind": "train"
+    },
+    {
+      "sentence": "คอมเมนต์ใต้โพสต์นี้ตลกมากอ่านแล้วหัวเราะหนักสุด ๆ",
+      "rule_id": "P183",
+      "kind": "train"
+    },
+    {
+      "sentence": "มุกตลกหน้าตายของเขาทำเอาทั้งโต๊ะขำกันจนเหนื่อย",
+      "rule_id": "P183",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นภาพตัดต่อมีมอันนี้แล้วหัวเราะลั่นห้องเลย",
+      "rule_id": "P183",
+      "kind": "train"
+    },
+    {
+      "sentence": "จังหวะที่เขาสะดุดล้มแบบการ์ตูนคือตลกจนขำแทบขาดใจ",
+      "rule_id": "P183",
+      "kind": "train"
+    },
+    {
+      "sentence": "อย่าเพิ่งคิดมากไปเองรอดูผลประกาศพรุ่งนี้ก่อน",
+      "rule_id": "P184",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงดึกทีไรชอบกังวลเรื่องอนาคตล่วงหน้าไปเองทุกที",
+      "rule_id": "P184",
+      "kind": "train"
+    },
+    {
+      "sentence": "แค่เขาตอบสั้น ๆ เราก็นั่งตีความคิดมากไปไกลแล้ว",
+      "rule_id": "P184",
+      "kind": "train"
+    },
+    {
+      "sentence": "เลิกคิดวนไปวนมาเรื่องที่ยังมาไม่ถึงสักทีเถอะ",
+      "rule_id": "P184",
+      "kind": "train"
+    },
+    {
+      "sentence": "นิสัยชอบคิดเล็กคิดน้อยไปเองทำให้เหนื่อยใจเปล่า ๆ",
+      "rule_id": "P184",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอแค่กังวลล่วงหน้ามากเกินไปจริง ๆ ไม่มีอะไรหรอก",
+      "rule_id": "P184",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำงานล่วงเวลาติดกันหลายสัปดาห์จนรู้สึกหมดไฟในการทำงาน",
+      "rule_id": "P185",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงเตรียมสอบเข้ามหาวิทยาลัยอ่านหนังสือหนักจนสมองล้าและหมดไฟ",
+      "rule_id": "P185",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตื่นเช้ามาแล้วรู้สึกไม่มีพลังอยากออกไปทำงานเลย",
+      "rule_id": "P185",
+      "kind": "train"
+    },
+    {
+      "sentence": "โปรเจกต์ยืดเยื้อมานานหลายเดือนจนคนในทีมเริ่มเหนื่อยล้าสะสม",
+      "rule_id": "P185",
+      "kind": "train"
+    },
+    {
+      "sentence": "อยากขอลาพักร้อนสักสัปดาห์เพราะช่วงนี้รู้สึกหมดไฟมาก",
+      "rule_id": "P185",
+      "kind": "train"
+    },
+    {
+      "sentence": "รับงานหลายทางพร้อมกันจนเริ่มรู้สึกเหนื่อยล้าและไม่มีแรงจูงใจ",
+      "rule_id": "P185",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นเพื่อนรีวิวลิปสติกรุ่นนี้แล้วต้องรีบกดสั่งซื้อตามทันที",
+      "rule_id": "P186",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงโปรโมชันลดราคาครึ่งหนึ่งแบบนี้ต้องจัดมาสักชิ้นแล้ว",
+      "rule_id": "P186",
+      "kind": "train"
+    },
+    {
+      "sentence": "เล็งกระเป๋าใบนี้มานานวันนี้ตัดสินใจซื้อมาเรียบร้อย",
+      "rule_id": "P186",
+      "kind": "train"
+    },
+    {
+      "sentence": "ใครเห็นเสื้อคอลเลกชันใหม่แล้วกดสั่งซื้อทันบ้าง",
+      "rule_id": "P186",
+      "kind": "train"
+    },
+    {
+      "sentence": "ของมันต้องมีเห็นปุ๊บก็ตัดสินใจกดซื้อปั๊บ",
+      "rule_id": "P186",
+      "kind": "train"
+    },
+    {
+      "sentence": "ได้โค้ดส่วนลดมาพอดีเลยรีบกดซื้อหูฟังใหม่",
+      "rule_id": "P186",
+      "kind": "train"
+    },
+    {
+      "sentence": "หลงเชื่อคำพูดขายตรงจนเสียเงินฟรีถูกหลอกเข้าเต็ม ๆ",
+      "rule_id": "P187",
+      "kind": "train"
+    },
+    {
+      "sentence": "นึกว่าได้ของแท้ราคาถูกแต่พอเปิดกล่องมาคือเสียรู้เขาแล้ว",
+      "rule_id": "P187",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไว้ใจให้เขายืมเงินแต่สุดท้ายถูกหลอกไม่ยอมคืน",
+      "rule_id": "P187",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซื้อทัวร์ราคาถูกผิดปกติสุดท้ายโดนหลอกลอยแพ",
+      "rule_id": "P187",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านสัญญาไม่ละเอียดเลยเสียรู้โดนคิดค่าธรรมเนียมเพิ่ม",
+      "rule_id": "P187",
+      "kind": "train"
+    },
+    {
+      "sentence": "เกือบเสียรู้มิจฉาชีพที่โทรมาแอบอ้างเป็นเจ้าหน้าที่แล้ว",
+      "rule_id": "P187",
+      "kind": "train"
+    },
+    {
+      "sentence": "แค่เห็นรอยยิ้มของศิลปินคนนี้ในคลิปสั้นก็หลงเสน่ห์ทันที",
+      "rule_id": "P188",
+      "kind": "train"
+    },
+    {
+      "sentence": "เล่นกับแมวจรหน้าหอพักวันเดียวก็เอ็นดูจนถอนตัวไม่ขึ้น",
+      "rule_id": "P188",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูการแสดงสดรอบเมื่อคืนแล้วกลายเป็นแฟนคลับทันที",
+      "rule_id": "P188",
+      "kind": "train"
+    },
+    {
+      "sentence": "แพ็กเกจสินค้าออกแบบมาน่ารักมากจนเห็นแล้วชอบทันที",
+      "rule_id": "P188",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฟังเสียงร้องสดท่อนฮุกเข้าไปทีเดียวหลงรักเลย",
+      "rule_id": "P188",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตอนแรกไม่ได้ตามวงนี้แต่พอดูรายการวาไรตี้แล้วชอบจนถอนตัวไม่ขึ้น",
+      "rule_id": "P188",
+      "kind": "train"
+    },
+    {
+      "sentence": "เนื้อย่างเตาถ่านร้านนี้นุ่มละลายในปากอร่อยมากจริง ๆ",
+      "rule_id": "P189",
+      "kind": "train"
+    },
+    {
+      "sentence": "เค้กช็อกโกแลตหน้านิ่มคำแรกคือรสชาติดีจนประทับใจสุด ๆ",
+      "rule_id": "P189",
+      "kind": "train"
+    },
+    {
+      "sentence": "น้ำซุปชาบูเข้มข้นกลมกล่อมอร่อยเกินคาดมาก",
+      "rule_id": "P189",
+      "kind": "train"
+    },
+    {
+      "sentence": "ข้าวซอยร้านลับเชียงใหม่รสชาติเข้มข้นอร่อยจนอยากสั่งเพิ่ม",
+      "rule_id": "P189",
+      "kind": "train"
+    },
+    {
+      "sentence": "กินของหวานร้านนี้ตอนเหนื่อย ๆ แล้วรู้สึกมีความสุขมาก",
+      "rule_id": "P189",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมนูเส้นร้านนี้ทำสดใหม่ทุกจานอร่อยจนต้องยกนิ้วให้",
+      "rule_id": "P189",
+      "kind": "train"
+    },
+    {
+      "sentence": "กินข้าวเที่ยงอิ่ม ๆ แล้วนั่งฟังบรรยายต่อคือง่วงจนลืมตาไม่ขึ้น",
+      "rule_id": "P190",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมื่อคืนนอนแค่สามชั่วโมงวันนี้ตอนบ่ายง่วงนอนมาก",
+      "rule_id": "P190",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านหนังสือสอบตอนตีสองจนเริ่มสัปหงกลืมตาไม่ขึ้นแล้ว",
+      "rule_id": "P190",
+      "kind": "train"
+    },
+    {
+      "sentence": "ประชุมช่วงบ่ายยาวสามชั่วโมงทำเอาง่วงนอนสุด ๆ",
+      "rule_id": "P190",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องไปหากาแฟเข้ม ๆ ดื่มด่วนเพราะตอนนี้ง่วงไม่ไหวแล้ว",
+      "rule_id": "P190",
+      "kind": "train"
+    },
+    {
+      "sentence": "นั่งรถทัวร์แอร์เย็น ๆ ไม่ถึงครึ่งชั่วโมงก็ง่วงจนจะหลับ",
+      "rule_id": "P190",
+      "kind": "train"
+    },
+    {
+      "sentence": "ติดประชุมตั้งแต่เช้ายังไม่ได้กินอะไรเลยตอนนี้หิวมาก",
+      "rule_id": "P191",
+      "kind": "train"
+    },
+    {
+      "sentence": "ได้กลิ่นไก่ย่างตอนดึกแล้วท้องร้องหิวขึ้นมาทันที",
+      "rule_id": "P191",
+      "kind": "train"
+    },
+    {
+      "sentence": "ออกกำลังกายเสร็จใหม่ ๆ รู้สึกหิวข้าวมากจนตาลาย",
+      "rule_id": "P191",
+      "kind": "train"
+    },
+    {
+      "sentence": "รอคิวร้านอาหารนานเกือบสองชั่วโมงจนหิวแทบทนไม่ไหว",
+      "rule_id": "P191",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ทำงานเพลินจนลืมกินมื้อเที่ยงตอนนี้หิวสุด ๆ",
+      "rule_id": "P191",
+      "kind": "train"
+    },
+    {
+      "sentence": "รีบสั่งอาหารกันเถอะทุกคนหิวกันมากแล้ว",
+      "rule_id": "P191",
+      "kind": "train"
+    },
+    {
+      "sentence": "คืนนี้ซีรีส์ตอนจบจะออกอากาศแล้วรอดูอย่างใจจดใจจ่อเลย",
+      "rule_id": "P192",
+      "kind": "train"
+    },
+    {
+      "sentence": "รอติดตามผลการแข่งขันรอบชิงชนะเลิศคืนนี้แบบไม่กะพริบตา",
+      "rule_id": "P192",
+      "kind": "train"
+    },
+    {
+      "sentence": "มีประเด็นดราม่าใหม่กำลังมาพวกเรารอติดตามข่าวกันได้เลย",
+      "rule_id": "P192",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตั้งนาฬิกาปลุกรอดูถ่ายทอดสดงานเปิดตัวสินค้าคืนนี้",
+      "rule_id": "P192",
+      "kind": "train"
+    },
+    {
+      "sentence": "แฟนคลับทุกคนรอชมมิวสิกวิดีโอเพลงใหม่พร้อมกันตอนหกโมงเย็น",
+      "rule_id": "P192",
+      "kind": "train"
+    },
+    {
+      "sentence": "เรื่องนี้กำลังเข้มข้นต้องรอติดตามตอนต่อไปอย่างใกล้ชิด",
+      "rule_id": "P192",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้เธอแต่งตัวและโพสท่าถ่ายรูปออกมาได้เป๊ะประทับใจสุด ๆ",
+      "rule_id": "P193",
+      "kind": "train"
+    },
+    {
+      "sentence": "ศิลปินขึ้นโชว์เพลงใหม่บนเวทีได้สมการรอคอยและทำดีมาก",
+      "rule_id": "P193",
+      "kind": "train"
+    },
+    {
+      "sentence": "คอนเทนต์วิดีโอตัวใหม่ของแบรนด์ทำออกมาได้โดนใจและปังมาก",
+      "rule_id": "P193",
+      "kind": "train"
+    },
+    {
+      "sentence": "นางเอกคนนี้ออกงานพรมแดงทีไรก็สวยเป๊ะไม่เคยทำให้ผิดหวัง",
+      "rule_id": "P193",
+      "kind": "train"
+    },
+    {
+      "sentence": "การแสดงสดรอบนี้จัดเต็มทั้งร้องและเต้นจนคนดูประทับใจมาก",
+      "rule_id": "P193",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนเราแต่งหน้าลุคไปงานเลี้ยงคืนนี้ได้สวยเด่นสุด ๆ",
+      "rule_id": "P193",
+      "kind": "train"
+    },
+    {
+      "sentence": "คาเฟ่เปิดใหม่ตกแต่งโทนสีทองและหินอ่อนดูหรูหรามาก",
+      "rule_id": "P194",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชุดเดรสตัวนี้ถึงราคาไม่แพงแต่ใส่แล้วดูแพงมีออร่าสุด ๆ",
+      "rule_id": "P194",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้ขอแต่งตัวสวยหรูไปดินเนอร์ร้านอาหารบนดาดฟ้า",
+      "rule_id": "P194",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไลฟ์สไตล์การเที่ยวพักผ่อนของเขาดูหรูหราและมีระดับมาก",
+      "rule_id": "P194",
+      "kind": "train"
+    },
+    {
+      "sentence": "กระเป๋ารุ่นนี้ดีไซน์เรียบหรูถือแล้วดูแพงมาก",
+      "rule_id": "P194",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมคอัพลุคผิวโกลว์วันนี้ทำให้หน้าดูสวยหรูเหมือนดารา",
+      "rule_id": "P194",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตัดผมทรงใหม่รอบนี้แล้วดูเริ่ดและเข้ากับหน้ามาก",
+      "rule_id": "P195",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชุดที่ใส่มาปาร์ตี้คืนนี้โดดเด่นสะดุดตาจนคนอื่นมองตาม",
+      "rule_id": "P195",
+      "kind": "train"
+    },
+    {
+      "sentence": "โปรดักชันงานเปิดตัวทำออกมาได้ยิ่งใหญ่และเริ่ดสุด ๆ",
+      "rule_id": "P195",
+      "kind": "train"
+    },
+    {
+      "sentence": "แต่งหน้าโทนเฉี่ยววันนี้ดูสวยเด่นและมั่นใจมาก",
+      "rule_id": "P195",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไอเดียจัดงานวันเกิดธีมนี้คือเริ่ดและสร้างสรรค์มาก",
+      "rule_id": "P195",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ่ายรูปมุมเสยเซตนี้ออกมาเท่และดูดีสุด ๆ",
+      "rule_id": "P195",
+      "kind": "train"
+    },
+    {
+      "sentence": "หยุดยาวสงกรานต์ปีนี้ได้นอนพักผ่อนอยู่บ้านแบบเต็มอิ่มสุด ๆ",
+      "rule_id": "P196",
+      "kind": "train"
+    },
+    {
+      "sentence": "ลงสกินแคร์ตัวใหม่แล้วผิวหน้าดูโกลว์สวยสุขภาพดีมาก",
+      "rule_id": "P196",
+      "kind": "train"
+    },
+    {
+      "sentence": "คอนเสิร์ตเมื่อคืนศิลปินร้องเพลงฮิตต่อเนื่องแบบจัดเต็ม",
+      "rule_id": "P196",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไปเที่ยวทะเลรอบนี้ถ่ายรูปสวย ๆ มาลงโซเชียลแบบจัดเต็มมาก",
+      "rule_id": "P196",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันศุกร์สิ้นเดือนทั้งทีขอสั่งของอร่อยมากินให้เต็มที่ไปเลย",
+      "rule_id": "P196",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฝนตกหนักติดต่อกันตั้งแต่เช้ายันเย็นแบบไม่หยุดพัก",
+      "rule_id": "P196",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอคนที่แอบชอบทักมาชมว่าวันนี้แต่งตัวน่ารักก็ต้องรีบกลั้นเขินไว้",
+      "rule_id": "P197",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นเขาสบตาแล้วยิ้มให้ต้องพยายามฮึบเก็บอาการเขินสุดชีวิต",
+      "rule_id": "P197",
+      "kind": "train"
+    },
+    {
+      "sentence": "โดนชมต่อหน้าเพื่อนทั้งกลุ่มทำเอาเขินแต่ต้องแกล้งทำหน้านิ่งไว้",
+      "rule_id": "P197",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูคลิปไอดอลส่งมินิฮาร์ทให้กล้องแล้วต้องกลั้นยิ้มเขินคนเดียว",
+      "rule_id": "P197",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านข้อความที่เขาตอบกลับมาแล้วเขินจนต้องเม้มปากเก็บอาการ",
+      "rule_id": "P197",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนแซวเรื่องคนคุยใหม่จนต้องรีบฮึบกลั้นยิ้มไว้",
+      "rule_id": "P197",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูฉากบอกรักในซีรีส์เมื่อคืนแล้วเขินจนยิ้มไม่หุบเลย",
+      "rule_id": "P198",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดินสวนกับคนที่ชอบแล้วเขาทักก่อนทำเอาเขินจนเสียอาการ",
+      "rule_id": "P198",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านแชทหวาน ๆ ของคู่นี้แล้วคนอ่านยิ้มกว้างจนแก้มปริ",
+      "rule_id": "P198",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นโมเมนต์คู่จิ้นในงานแฟนมีตติ้งแล้วฟินจนเก็บอาการไม่อยู่",
+      "rule_id": "P198",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาจำรายละเอียดเล็ก ๆ ของเราได้หมดทำเอาเขินจนยิ้มค้างไปเลย",
+      "rule_id": "P198",
+      "kind": "train"
+    },
+    {
+      "sentence": "นั่งดูคลิปตัวเองตอนโดนเซอร์ไพรส์แล้วยิ้มเขินอยู่คนเดียว",
+      "rule_id": "P198",
+      "kind": "train"
+    },
+    {
+      "sentence": "แต่งตัวเสร็จพร้อมออกแล้วเพิ่งรู้ว่านัดเป็นวันพรุ่งนี้จะบ้าตาย",
+      "rule_id": "P199",
+      "kind": "train"
+    },
+    {
+      "sentence": "หยิบรีโมตแอร์สลับกับโทรศัพท์มือถือใส่กระเป๋ามาทำงานจะบ้าตายจริง ๆ",
+      "rule_id": "P199",
+      "kind": "train"
+    },
+    {
+      "sentence": "วุ่นวายตั้งแต่เช้ายันเย็นมีแต่เรื่องเซอร์ไพรส์ไม่หยุดแทบจะบ้า",
+      "rule_id": "P199",
+      "kind": "train"
+    },
+    {
+      "sentence": "พิมพ์รหัสผ่านผิดครบสามครั้งจนบัญชีถูกล็อกจะบ้าตาย",
+      "rule_id": "P199",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตั้งใจมาซื้อของชิ้นเดียวแต่ได้ของแถมเต็มตะกร้าจะบ้า",
+      "rule_id": "P199",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนแต่ละคนในกลุ่มส่งมีมตลกมาไม่พักเลยจะบ้าตาย",
+      "rule_id": "P199",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชีวิตช่วงนี้ในแต่ละวันมีแต่เรื่องวุ่นวายให้ต้องตามแก้ไม่เว้นเลย",
+      "rule_id": "P200",
+      "kind": "train"
+    },
+    {
+      "sentence": "แต่ละวันที่ผ่านไปในออฟฟิศมีเรื่องพีค ๆ มาให้ตื่นเต้นตลอด",
+      "rule_id": "P200",
+      "kind": "train"
+    },
+    {
+      "sentence": "เลี้ยงแมวซนสองตัวทำให้แต่ละวันมีเรื่องปวดหัวไม่ซ้ำแบบ",
+      "rule_id": "P200",
+      "kind": "train"
+    },
+    {
+      "sentence": "เปิดเทอมใหม่นี้แต่ละวันต้องวิ่งเรียนข้ามตึกจนขาลาก",
+      "rule_id": "P200",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูข่าวโซเชียลช่วงนี้แต่ละวันมีประเด็นใหม่มาให้ตามตลอด",
+      "rule_id": "P200",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชีวิตมนุษย์เงินเดือนแต่ละวันหมดไปกับการประชุมและแก้งาน",
+      "rule_id": "P200",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงนี้โปรเจกต์เร่งด่วนหนักมากแต่ต้องอดทนทำไปจนกว่าจะผ่านพ้น",
+      "rule_id": "P201",
+      "kind": "train"
+    },
+    {
+      "sentence": "เหลือสอบอีกแค่สองตัวสุดท้ายอดทนสู้ไปจนกว่าจะปิดเทอมนะ",
+      "rule_id": "P201",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงปลายเดือนเงินเหลือน้อยต้องอดทนประหยัดไปจนกว่าเงินเดือนจะออก",
+      "rule_id": "P201",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถึงงานจะเหนื่อยแค่ไหนก็ต้องอดทนประคองตัวไปจนกว่าจะถึงวันหยุดยาว",
+      "rule_id": "P201",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจอปัญหาเข้ามารุมเร้าแต่ต้องฮึบอดทนรอจนกว่าทุกอย่างจะคลี่คลาย",
+      "rule_id": "P201",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฝึกงานช่วงแรกอาจปรับตัวยากหน่อยอดทนไปจนกว่าจะเข้าที่นะ",
+      "rule_id": "P201",
+      "kind": "train"
+    },
+    {
+      "sentence": "ก่อนจะวิจารณ์เรื่องนี้ต้องมาอธิบายให้ความรู้ที่ถูกต้องกันก่อน",
+      "rule_id": "P202",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขออนุญาตให้ข้อมูลที่ถูกต้องเกี่ยวกับวิธีแยกขยะรีไซเคิลนะครับ",
+      "rule_id": "P202",
+      "kind": "train"
+    },
+    {
+      "sentence": "คอมเมนต์นี้ช่วยอธิบายให้ความรู้เรื่องกฎหมายลิขสิทธิ์ได้เข้าใจง่ายมาก",
+      "rule_id": "P202",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ้าเพื่อนยังเข้าใจผิดอยู่เราควรค่อย ๆ อธิบายให้เขาเข้าใจข้อมูลจริง",
+      "rule_id": "P202",
+      "kind": "train"
+    },
+    {
+      "sentence": "โพสต์สรุปอันนี้ทำขึ้นมาเพื่อให้ความรู้กับคนที่เพิ่งเริ่มลงทุน",
+      "rule_id": "P202",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องช่วยกันชี้แจงและให้ความรู้ที่ถูกต้องเพื่อไม่ให้เกิดข่าวปลอม",
+      "rule_id": "P202",
+      "kind": "train"
+    },
+    {
+      "sentence": "อย่าเพิ่งไปทักเขาเรื่องนั้นเลยเดี๋ยวบรรยากาศมันจะดูแปลก ๆ เอา",
+      "rule_id": "P203",
+      "kind": "train"
+    },
+    {
+      "sentence": "ใส่ชุดสีนี้ไปงานทางการมันจะดูไม่ค่อยเหมาะหรือเปล่า",
+      "rule_id": "P203",
+      "kind": "train"
+    },
+    {
+      "sentence": "พูดตรงเกินไปต่อหน้าคนเยอะ ๆ เดี๋ยวมันจะดูไม่ดีนะ",
+      "rule_id": "P203",
+      "kind": "train"
+    },
+    {
+      "sentence": "ความรู้สึกตอนนี้มันอธิบายไม่ถูกเหมือนมีอะไรติดอยู่ในใจ",
+      "rule_id": "P203",
+      "kind": "train"
+    },
+    {
+      "sentence": "จะปฏิเสธเขาตรง ๆ ก็กลัวว่าจะดูน่าอึดอัดเกินไป",
+      "rule_id": "P203",
+      "kind": "train"
+    },
+    {
+      "sentence": "อย่าทำท่าทางมีพิรุธสิเดี๋ยวคนอื่นเขาสงสัยเอา",
+      "rule_id": "P203",
+      "kind": "train"
+    },
+    {
+      "sentence": "การแซงคิวคนอื่นหน้าตาเฉยเป็นพฤติกรรมที่ไร้มารยาทมาก",
+      "rule_id": "P204",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทิ้งขยะไม่ลงถังในที่สาธารณะดูไม่มีจิตสำนึกทางสังคมเลย",
+      "rule_id": "P204",
+      "kind": "train"
+    },
+    {
+      "sentence": "พูดจาดูถูกพนักงานบริการเป็นนิสัยที่แย่และไม่เหมาะสมอย่างยิ่ง",
+      "rule_id": "P204",
+      "kind": "train"
+    },
+    {
+      "sentence": "จอดรถขวางทางเข้าออกบ้านคนอื่นโดยไม่สนใจใครมารยาทแย่มาก",
+      "rule_id": "P204",
+      "kind": "train"
+    },
+    {
+      "sentence": "แอบถ่ายรูปคนอื่นไปลงโซเชียลเพื่อประจานเป็นพฤติกรรมที่แย่สุด ๆ",
+      "rule_id": "P204",
+      "kind": "train"
+    },
+    {
+      "sentence": "เปิดลำโพงเสียงดังรบกวนคนในรถไฟฟ้าไม่รักษามารยาทเลย",
+      "rule_id": "P204",
+      "kind": "train"
+    },
+    {
+      "sentence": "แค่ตื่นมาวิ่งตอนเช้าวันเดียวแต่โพสต์เล่าเหมือนไม่เคยมีใครทำมาก่อน",
+      "rule_id": "P205",
+      "kind": "train"
+    },
+    {
+      "sentence": "หัดต้มมาม่าใส่ไข่แล้วภูมิใจเหมือนเพิ่งค้นพบสูตรลับระดับโลก",
+      "rule_id": "P205",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซื้อโทรศัพท์รุ่นยอดฮิตที่คนใช้กันทั้งเมืองแต่รีวิวเหมือนมีอยู่เครื่องเดียว",
+      "rule_id": "P205",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพิ่งเคยขึ้นรถไฟฟ้าสายใหม่แล้วตื่นเต้นเล่าใหญ่เหมือนเป็นเรื่องแปลกใหม่มาก",
+      "rule_id": "P205",
+      "kind": "train"
+    },
+    {
+      "sentence": "จัดโต๊ะทำงานเสร็จแล้วอวดเพื่อนเหมือนทำสิ่งที่ไม่มีใครเคยทำ",
+      "rule_id": "P205",
+      "kind": "train"
+    },
+    {
+      "sentence": "กินชาเขียวมัทฉะร้านดังแล้วรีวิวเหมือนเป็นคนค้นพบร้านนี้คนแรก",
+      "rule_id": "P205",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้เพื่อนแต่งหน้าทำผมมาสวยเป๊ะไร้ที่ติจนต้องอวยยศ",
+      "rule_id": "P206",
+      "kind": "train"
+    },
+    {
+      "sentence": "ผิวหน้าหลังพักผ่อนเต็มที่ดูใสและสวยสมบูรณ์แบบเกินจริงมาก",
+      "rule_id": "P206",
+      "kind": "train"
+    },
+    {
+      "sentence": "ลุคออกงานคืนนี้ของเธอคือสวยเด่นดูดีไปหมดทุกส่วน",
+      "rule_id": "P206",
+      "kind": "train"
+    },
+    {
+      "sentence": "ฟิลเตอร์กล้องตัวนี้ถ่ายออกมาแล้วหน้าเนียนสวยเป๊ะเกินคาด",
+      "rule_id": "P206",
+      "kind": "train"
+    },
+    {
+      "sentence": "จัดไฟถ่ายรูปมุมนี้แล้วออกมาสวยดูดีแบบไม่มีที่ติเลย",
+      "rule_id": "P206",
+      "kind": "train"
+    },
+    {
+      "sentence": "ชุดใหม่ที่เพิ่งถอยมาใส่แล้วหุ่นดีสวยเป๊ะสุด ๆ",
+      "rule_id": "P206",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านหนังสือเต็มที่แล้วที่เหลือต้องขอพึ่งสิ่งศักดิ์สิทธิ์ช่วยดลบันดาล",
+      "rule_id": "P207",
+      "kind": "train"
+    },
+    {
+      "sentence": "เปลี่ยนภาพหน้าจอมือถือเป็นรูปเสริมดวงการเงินตามความเชื่อ",
+      "rule_id": "P207",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนกลุ่มนี้ชอบตระเวนไหว้พระขอพรเรื่องความรักและหน้าที่การงาน",
+      "rule_id": "P207",
+      "kind": "train"
+    },
+    {
+      "sentence": "ก่อนกดจองบัตรคอนเสิร์ตต้องพึ่งความเชื่อเรื่องสีเสื้อมงคลสักหน่อย",
+      "rule_id": "P207",
+      "kind": "train"
+    },
+    {
+      "sentence": "ปีนี้ตั้งใจจะไปขอพรเรื่องการงานให้ราบรื่นประสบความสำเร็จ",
+      "rule_id": "P207",
+      "kind": "train"
+    },
+    {
+      "sentence": "เธอเป็นคนที่สนใจเรื่องดวงชะตาและเครื่องรางนำโชคมาก",
+      "rule_id": "P207",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูน้องแมวส้มตัวอ้วนที่นอนขดอยู่หน้าร้านสิน่ารักน่าเอ็นดูมาก",
+      "rule_id": "P208",
+      "kind": "train"
+    },
+    {
+      "sentence": "พวงกุญแจตุ๊กตาตัวนี้หน้าตาน่ารักจนต้องรับน้องกลับบ้าน",
+      "rule_id": "P208",
+      "kind": "train"
+    },
+    {
+      "sentence": "น้องหมาโกลเด้นวิ่งส่ายหางมารับที่หน้าประตูดูน่าเอ็นดูสุด ๆ",
+      "rule_id": "P208",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้นกระบองเพชรต้นเล็กบนโต๊ะทำงานกำลังออกดอกน่ารักมาก",
+      "rule_id": "P208",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นแก้มกลม ๆ ของน้องกระต่ายแล้วอยากเข้าไปลูบหัว",
+      "rule_id": "P208",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้พาน้องแมวไปฉีดวัคซีนคุณหมอชมว่าน้องเรียบร้อยมาก",
+      "rule_id": "P208",
+      "kind": "train"
+    },
+    {
+      "sentence": "ปีหน้ามีแผนจะไปเที่ยวต่างประเทศกับกลุ่มเพื่อน",
+      "rule_id": "P209",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงหยุดยาวคนนิยมเดินทางไปพักผ่อนต่างประเทศกันเยอะ",
+      "rule_id": "P209",
+      "kind": "train"
+    },
+    {
+      "sentence": "สินค้าชิ้นนี้ต้องรอพรีออเดอร์ส่งตรงมาจากต่างประเทศ",
+      "rule_id": "P209",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขากำลังเตรียมสอบวัดระดับภาษาเพื่อไปเรียนต่อต่างประเทศ",
+      "rule_id": "P209",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำงานบริษัทนี้มีโอกาสได้ไปดูงานที่ต่างประเทศด้วย",
+      "rule_id": "P209",
+      "kind": "train"
+    },
+    {
+      "sentence": "ค่าโรมมิ่งโทรศัพท์เวลาไปใช้ที่ต่างประเทศเดี๋ยวนี้ถูกลงมาก",
+      "rule_id": "P209",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงปลายปีห้างจัดโปรโมชันลดราคาเครื่องสำอางเยอะมาก",
+      "rule_id": "P210",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วยแนะนำร้านขายเครื่องสำอางของแท้ในไอจีให้หน่อย",
+      "rule_id": "P210",
+      "kind": "train"
+    },
+    {
+      "sentence": "จัดโต๊ะเครื่องแป้งใหม่เพราะเครื่องสำอางเริ่มล้นลิ้นชักแล้ว",
+      "rule_id": "P210",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไปเที่ยวเกาหลีรอบนี้ตั้งใจจะไปซื้อเครื่องสำอางกลับมาตุนไว้",
+      "rule_id": "P210",
+      "kind": "train"
+    },
+    {
+      "sentence": "รีวิวเครื่องสำอางที่ใช้แล้วติดทนไม่หลุดระหว่างวัน",
+      "rule_id": "P210",
+      "kind": "train"
+    },
+    {
+      "sentence": "กระเป๋าใส่เครื่องสำอางใบนี้จุของได้เยอะและพกพาสะดวก",
+      "rule_id": "P210",
+      "kind": "train"
+    },
+    {
+      "sentence": "เปิดแอปขึ้นมาวันนี้หน้าไทม์ไลน์มีแต่คนพูดถึงข่าวเดียวกันเต็มไปหมด",
+      "rule_id": "P211",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงดึก ๆ หน้าไทม์ไลน์มักจะมีแต่คนลงรูปอาหารชวนหิว",
+      "rule_id": "P211",
+      "kind": "train"
+    },
+    {
+      "sentence": "เลื่อนดูหน้าฟีดโซเชียลตั้งแต่เช้าเจอแต่มีมตลก ๆ",
+      "rule_id": "P211",
+      "kind": "train"
+    },
+    {
+      "sentence": "ใครยังอยู่บนหน้าไทม์ไลน์ตอนนี้แวะมาคุยกันหน่อย",
+      "rule_id": "P211",
+      "kind": "train"
+    },
+    {
+      "sentence": "รีเฟรชหน้าไทม์ไลน์กี่รอบก็เจอแต่โพสต์สปอยล์ซีรีส์ตอนจบ",
+      "rule_id": "P211",
+      "kind": "train"
+    },
+    {
+      "sentence": "บรรยากาศบนหน้าไทม์ไลน์วันนี้ดูคึกคักเป็นพิเศษ",
+      "rule_id": "P211",
+      "kind": "train"
+    },
+    {
+      "sentence": "บัญชีร้านค้านี้มียอดผู้ติดตามเพิ่มขึ้นเร็วมากหลังคลิปไวรัล",
+      "rule_id": "P212",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอบคุณผู้ติดตามทุกคนที่คอยสนับสนุนเพจของเรามาตลอด",
+      "rule_id": "P212",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอลงคอนเทนต์สรุปความรู้ยอดฟอลโลเวอร์ก็พุ่งขึ้นหลักหมื่น",
+      "rule_id": "P212",
+      "kind": "train"
+    },
+    {
+      "sentence": "กำลังจัดกิจกรรมแจกของรางวัลให้ผู้ติดตามในทวิตเตอร์",
+      "rule_id": "P212",
+      "kind": "train"
+    },
+    {
+      "sentence": "อินฟลูเอนเซอร์คนนี้มีฐานผู้ติดตามที่เป็นวัยรุ่นจำนวนมาก",
+      "rule_id": "P212",
+      "kind": "train"
+    },
+    {
+      "sentence": "อยากหาวิธีเพิ่มยอดผู้ติดตามแบบธรรมชาติโดยไม่ต้องยิงแอด",
+      "rule_id": "P212",
+      "kind": "train"
+    },
+    {
+      "sentence": "อย่าเพิ่งเชื่อข่าวลือรอให้บัญชีทางการของค่ายออกมาประกาศดีกว่า",
+      "rule_id": "P213",
+      "kind": "train"
+    },
+    {
+      "sentence": "สั่งซื้อสินค้าจากร้านค้าทางการบนแอปจะได้ของแท้แน่นอน",
+      "rule_id": "P213",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตอนนี้เพจทางการเพิ่งลงรายละเอียดผังที่นั่งคอนเสิร์ตแล้ว",
+      "rule_id": "P213",
+      "kind": "train"
+    },
+    {
+      "sentence": "รูปโปรโมตเซตใหม่ที่บัญชีทางการปล่อยออกมาสวยมาก",
+      "rule_id": "P213",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องรอดูแถลงการณ์ยืนยันจากทางต้นสังกัดอย่างเป็นทางการอีกที",
+      "rule_id": "P213",
+      "kind": "train"
+    },
+    {
+      "sentence": "ของที่ระลึกหน้างานรอบนี้ทางออฟฟิเชียลทำแพ็กเกจออกมาดีมาก",
+      "rule_id": "P213",
+      "kind": "train"
+    },
+    {
+      "sentence": "โอ้มายก้อด เขาประกาศตารางทัวร์คอนเสิร์ตที่กรุงเทพแล้ว",
+      "rule_id": "P214",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไม่น่าเชื่อเลยว่าเราจะสุ่มได้รางวัลใหญ่ในงานปีใหม่",
+      "rule_id": "P214",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตกใจมากเมื่อกี้เปิดดูคะแนนสอบแล้วได้เต็มร้อย",
+      "rule_id": "P214",
+      "kind": "train"
+    },
+    {
+      "sentence": "คุณพระช่วย ลดราคาสูงสุดถึงแปดสิบเปอร์เซ็นต์จริงเหรอเนี่ย",
+      "rule_id": "P214",
+      "kind": "train"
+    },
+    {
+      "sentence": "โอ้มายก้อด บังเอิญเดินเจอศิลปินคนโปรดที่ห้างแบบใกล้มาก",
+      "rule_id": "P214",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไม่น่าเชื่อเลยว่าทั้งสองคนจะแอบคบกันมาตั้งสองปีแล้ว",
+      "rule_id": "P214",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านดราม่าในโซเชียลวันนี้แล้วรู้สึกประสาทเสียแทนจริง ๆ",
+      "rule_id": "P215",
+      "kind": "train"
+    },
+    {
+      "sentence": "ต้องทำงานร่วมกับคนที่เปลี่ยนคำสั่งทุกห้านาทีชวนประสาทเสียมาก",
+      "rule_id": "P215",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจอเพื่อนร่วมห้องไม่ช่วยทำงานกลุ่มแล้วยังเรื่องมากอีกประสาทจะเสีย",
+      "rule_id": "P215",
+      "kind": "train"
+    },
+    {
+      "sentence": "ระบบลงทะเบียนเรียนล่มซ้ำซากจนนักศึกษาประสาทเสียกันหมด",
+      "rule_id": "P215",
+      "kind": "train"
+    },
+    {
+      "sentence": "คุยกับคนตรรกะเพี้ยนนาน ๆ แล้วรู้สึกเหนื่อยและประสาทเสียมาก",
+      "rule_id": "P215",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้เจอแต่เรื่องวุ่นวายไม่เป็นเรื่องชวนให้หงุดหงิดหัวเสียสุด ๆ",
+      "rule_id": "P215",
+      "kind": "train"
+    },
+    {
+      "sentence": "แย่แล้ว ลืมกดแนบไฟล์ในอีเมลที่เพิ่งส่งหาลูกค้าเมื่อกี้",
+      "rule_id": "P216",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซวยแล้ว ตื่นมาดูนาฬิกาอีกสิบนาทีจะเริ่มสอบแล้ว",
+      "rule_id": "P216",
+      "kind": "train"
+    },
+    {
+      "sentence": "แย่แล้ว เผลอกดลบโฟลเดอร์งานสำคัญทิ้งไปโดยไม่ได้สำรองข้อมูล",
+      "rule_id": "P216",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซวยหนักมาก ลืมเอากระเป๋าสตางค์มาแต่กินข้าวเสร็จเรียบร้อยแล้ว",
+      "rule_id": "P216",
+      "kind": "train"
+    },
+    {
+      "sentence": "แย่จริง ๆ ฝนตกหนักมากแต่ลืมเก็บผ้าที่ตากไว้ระเบียงห้อง",
+      "rule_id": "P216",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซวยแล้ว ส่งข้อความนินทาหัวหน้าผิดไปลงในกลุ่มที่หัวหน้าอยู่ด้วย",
+      "rule_id": "P216",
+      "kind": "train"
+    },
+    {
+      "sentence": "นี่มันเรื่องบ้าอะไรกันเนี่ยทำไมอยู่ดี ๆ ไฟดับทั้งตึก",
+      "rule_id": "P217",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านข่าวนี้จบแล้วได้แต่ถามตัวเองว่าอะไรกันเนี่ย",
+      "rule_id": "P217",
+      "kind": "train"
+    },
+    {
+      "sentence": "เปิดพัสดุมาเจอของไม่ตรงปกอย่างแรงนี่มันอะไรกันเนี่ย",
+      "rule_id": "P217",
+      "kind": "train"
+    },
+    {
+      "sentence": "แก้โค้ดบรรทัดเดียวแต่โปรแกรมพังทั้งระบบเรื่องบ้าอะไรเนี่ย",
+      "rule_id": "P217",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นราคาค่าจอดรถสามชั่วโมงแล้วงงเลยว่าอะไรกันเนี่ย",
+      "rule_id": "P217",
+      "kind": "train"
+    },
+    {
+      "sentence": "อยู่ดี ๆ เขาก็ทักมาขอยืมเงินทั้งที่ไม่เคยคุยกันนี่มันอะไรเนี่ย",
+      "rule_id": "P217",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตอนนี้หิวข้าวมากอยากกินชาบูเดี๋ยวนี้เลย",
+      "rule_id": "P218",
+      "kind": "train"
+    },
+    {
+      "sentence": "ณ ตอนนี้ยังติดอยู่บนรถไฟฟ้าอยู่เลยไปไม่ทันแน่",
+      "rule_id": "P218",
+      "kind": "train"
+    },
+    {
+      "sentence": "อยากลาพักร้อนไปนอนริมทะเลตอนนี้เลยจริง ๆ",
+      "rule_id": "P218",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตอนนี้ยุ่งมากเดี๋ยวอีกครึ่งชั่วโมงติดต่อกลับนะ",
+      "rule_id": "P218",
+      "kind": "train"
+    },
+    {
+      "sentence": "ง่วงนอนสุด ๆ ตอนนี้อยากวาร์ปกลับไปนอนที่ห้องเลย",
+      "rule_id": "P218",
+      "kind": "train"
+    },
+    {
+      "sentence": "ณ ตอนนี้ยังไม่มีใครส่งไฟล์สรุปเข้ามาในกลุ่มเลย",
+      "rule_id": "P218",
+      "kind": "train"
+    },
+    {
+      "sentence": "อันนี้อาจจะเป็นข้อมูลส่วนตัวที่ละเอียดเกินไปหน่อยนะแต่เมื่อคืนท้องเสียหนักมาก",
+      "rule_id": "P219",
+      "kind": "train"
+    },
+    {
+      "sentence": "ไม่ต้องเล่ารายละเอียดตอนเข้าห้องน้ำขนาดนั้นก็ได้มันละเอียดเกินไป",
+      "rule_id": "P219",
+      "kind": "train"
+    },
+    {
+      "sentence": "เขาชอบเล่าเรื่องส่วนตัวในครอบครัวให้คนไม่สนิทฟังแบบละเอียดเกิน",
+      "rule_id": "P219",
+      "kind": "train"
+    },
+    {
+      "sentence": "ข้อมูลตรงนี้ละเอียดเกินกว่าที่อยากรู้ไปมากเลยหยุดเล่าก่อน",
+      "rule_id": "P219",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอเล่าเกร็ดเล็ก ๆ ที่อาจจะดูเป็นเรื่องส่วนตัวนิดหนึ่งนะ",
+      "rule_id": "P219",
+      "kind": "train"
+    },
+    {
+      "sentence": "บางเรื่องเก็บไว้รู้คนเดียวก็ได้ไม่ต้องบอกละเอียดทุกขั้นตอนขนาดนั้น",
+      "rule_id": "P219",
+      "kind": "train"
+    },
+    {
+      "sentence": "แบตเตอรี่มือถือกำลังจะหมดแล้วต้องขอตัวไปก่อนนะ",
+      "rule_id": "P220",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถึงเวลาเข้าห้องประชุมแล้วต้องไปแล้วนะทุกคน",
+      "rule_id": "P220",
+      "kind": "train"
+    },
+    {
+      "sentence": "รถเมล์มาถึงป้ายพอดีขอตัวไปขึ้นรถก่อนนะ",
+      "rule_id": "P220",
+      "kind": "train"
+    },
+    {
+      "sentence": "แม่เรียกไปกินข้าวเย็นแล้วต้องวางสายไปก่อนนะ",
+      "rule_id": "P220",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดี๋ยวต้องรีบออกไปธุระข้างนอกแล้วขอตัวก่อนนะ",
+      "rule_id": "P220",
+      "kind": "train"
+    },
+    {
+      "sentence": "ได้เวลาเริ่มงานกะบ่ายแล้วต้องไปแล้วนะไว้คุยกัน",
+      "rule_id": "P220",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอโทษทีเมื่อกี้ไม่ได้อยู่หน้าจอพอดีลุกไปรับพัสดุข้างล่างมา",
+      "rule_id": "P221",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดี๋ยวขอวางมือถือไม่ได้อยู่หน้าจอสักยี่สิบนาทีจะไปอาบน้ำ",
+      "rule_id": "P221",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทักไปแล้วเขายังไม่ขยับตัวเลยสงสัยจะไม่ได้อยู่หน้าคอมตอนนี้",
+      "rule_id": "P221",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอพักสายตาเดินออกจากหน้าจอไปชงกาแฟแป๊บหนึ่งนะ",
+      "rule_id": "P221",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงบ่ายสามอาจไม่ได้อยู่หน้าจอเพราะต้องเดินไปส่งเอกสารอีกตึก",
+      "rule_id": "P221",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ้าเห็นตัวละครยืนนิ่ง ๆ คือลุกไปเข้าห้องน้ำไม่ได้อยู่หน้าจอนะ",
+      "rule_id": "P221",
+      "kind": "train"
+    },
+    {
+      "sentence": "ส่งงานชิ้นสุดท้ายของสัปดาห์เสร็จเรียบร้อยดีใจที่ถึงวันศุกร์สักที",
+      "rule_id": "P222",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทำงานเหนื่อยมาทั้งอาทิตย์ในที่สุดก็ถึงเย็นวันศุกร์แล้ว",
+      "rule_id": "P222",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดีใจมากที่วันนี้เป็นวันศุกร์จะได้หยุดพักผ่อนเสาร์อาทิตย์สักที",
+      "rule_id": "P222",
+      "kind": "train"
+    },
+    {
+      "sentence": "เย็นวันศุกร์ทั้งทีไปฉลองกินเนื้อย่างหลังเลิกงานกันเถอะ",
+      "rule_id": "P222",
+      "kind": "train"
+    },
+    {
+      "sentence": "อดทนตื่นเช้ามาห้าวันเต็มในที่สุดก็ถึงวันศุกร์ที่รอคอย",
+      "rule_id": "P222",
+      "kind": "train"
+    },
+    {
+      "sentence": "บรรยากาศออฟฟิศวันนี้สดใสมากเพราะทุกคนดีใจที่ถึงวันศุกร์",
+      "rule_id": "P222",
+      "kind": "train"
+    },
+    {
+      "sentence": "เดี๋ยวเราส่งไฟล์สรุปการประชุมให้วันพรุ่งนี้ตอนเช้านะ",
+      "rule_id": "P223",
+      "kind": "train"
+    },
+    {
+      "sentence": "นัดซ้อมพรีเซนต์งานกลุ่มเป็นวันพรุ่งนี้บ่ายสองเหมือนเดิมนะ",
+      "rule_id": "P223",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันพรุ่งนี้ใครเข้าออฟฟิศบ้างฝากซื้อกาแฟหน่อย",
+      "rule_id": "P223",
+      "kind": "train"
+    },
+    {
+      "sentence": "อย่าลืมว่าวันพรุ่งนี้มีควิซย่อยท้ายคาบเรียนนะทุกคน",
+      "rule_id": "P223",
+      "kind": "train"
+    },
+    {
+      "sentence": "ตารางงานของวันพรุ่งนี้ค่อนข้างแน่นตั้งแต่เช้าเลย",
+      "rule_id": "P223",
+      "kind": "train"
+    },
+    {
+      "sentence": "เอาไว้ค่อยคุยรายละเอียดเพิ่มเติมกันวันพรุ่งนี้อีกที",
+      "rule_id": "P223",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอบคุณมาก ๆ เลยนะที่อยู่ช่วยแก้โค้ดให้จนดึกเมื่อคืนนี้",
+      "rule_id": "P224",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอบคุณจริง ๆ จากใจที่ช่วยเป็นธุระจัดการเรื่องเอกสารให้ทั้งหมด",
+      "rule_id": "P224",
+      "kind": "train"
+    },
+    {
+      "sentence": "ถ้าไม่ได้เธอช่วยไว้ต้องแย่แน่ ๆ ขอบคุณมากที่สุดเลยนะ",
+      "rule_id": "P224",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอบคุณมาก ๆ สำหรับของขวัญวันเกิดปีนี้ถูกใจสุด ๆ เลย",
+      "rule_id": "P224",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซาบซึ้งใจมากและขอบคุณจริง ๆ ที่คอยรับฟังและให้คำปรึกษามาตลอด",
+      "rule_id": "P224",
+      "kind": "train"
+    },
+    {
+      "sentence": "ขอบคุณมาก ๆ เลยนะที่อุตส่าห์ขับรถแวะมารับถึงหน้าบ้าน",
+      "rule_id": "P224",
+      "kind": "train"
+    },
+    {
+      "sentence": "ดูซีรีส์ฉากซึ้งเมื่อกี้แล้วต้องการทิชชู่ด่วนตอนนี้เลย",
+      "rule_id": "P225",
+      "kind": "train"
+    },
+    {
+      "sentence": "นั่งทำงานหน้าคอมมาแปดชั่วโมงอยากหาร้านนวดแผนไทยเดี๋ยวนี้มาก",
+      "rule_id": "P225",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นเพื่อนเปิดตัวแฟนกันหมดแล้วต้องการคนคุยใหม่ด่วนตอนนี้",
+      "rule_id": "P225",
+      "kind": "train"
+    },
+    {
+      "sentence": "ปวดหลังไม่ไหวแล้วอยากหากายภาพบำบัดมาช่วยเดี๋ยวนี้เลย",
+      "rule_id": "P225",
+      "kind": "train"
+    },
+    {
+      "sentence": "อากาศร้อนอบอ้าวขนาดนี้ต้องการร้านบิงซูน้ำแข็งไสด่วนตอนนี้",
+      "rule_id": "P225",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจอเรื่องเครียดตั้งแต่เช้าอยากหาหมูกระทะเยียวยาใจเดี๋ยวนี้",
+      "rule_id": "P225",
+      "kind": "train"
+    },
+    {
+      "sentence": "การแสดงโชว์รอบนี้เต้นเป๊ะเต็มที่แบบไม่มีข้อติเลย",
+      "rule_id": "P226",
+      "kind": "train"
+    },
+    {
+      "sentence": "รสชาติอาหารร้านใหม่คืออร่อยเต็มร้อยไม่มีจุดให้ติ",
+      "rule_id": "P226",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้เธอแต่งตัวแมตช์คู่สีออกมาได้สวยสมบูรณ์แบบไม่มีข้อติเลย",
+      "rule_id": "P226",
+      "kind": "train"
+    },
+    {
+      "sentence": "บริการของพนักงานโรงแรมนี้ดูแลดีมากแบบเต็มร้อย",
+      "rule_id": "P226",
+      "kind": "train"
+    },
+    {
+      "sentence": "บทสรุปของหนังเรื่องนี้ทำออกมาได้ประทับใจแบบไม่มีข้อติ",
+      "rule_id": "P226",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนถ่ายรูปให้รอบนี้มุมสวยถูกใจเต็มร้อยเลย",
+      "rule_id": "P226",
+      "kind": "train"
+    },
+    {
+      "sentence": "กลิ่นหอมของเนยสดร้านขนมปังนี้อร่อยมากจนห้ามใจไม่อยู่",
+      "rule_id": "P227",
+      "kind": "train"
+    },
+    {
+      "sentence": "รอยยิ้มของน้องหมาตัวนี้น่ารักมากจนต้านทานไม่ไหวจริง ๆ",
+      "rule_id": "P227",
+      "kind": "train"
+    },
+    {
+      "sentence": "โปรโมชันลดราคาครึ่งหนึ่งรอบนี้คุ้มค่ามากจนห้ามใจไม่ซื้อไม่อยู่",
+      "rule_id": "P227",
+      "kind": "train"
+    },
+    {
+      "sentence": "ความหล่อของพระเอกในฉากเปิดตัวคือดูดีมากจนต้านทานไม่ไหว",
+      "rule_id": "P227",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมนูชาไทยชีสเค้กร้านนี้หวานมันอร่อยจนห้ามใจไม่อยู่",
+      "rule_id": "P227",
+      "kind": "train"
+    },
+    {
+      "sentence": "แดดช่วงบ่ายวันนี้ร้อนแรงมากจนแทบต้านทานไม่ไหว",
+      "rule_id": "P227",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้เดินซื้อของทั้งวันเลยแอบเมื่อยขานิดหน่อย",
+      "rule_id": "P228",
+      "kind": "train"
+    },
+    {
+      "sentence": "เห็นราคาในเมนูแล้วแอบตกใจเล็กน้อยแต่ก็สั่งมาลอง",
+      "rule_id": "P228",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอได้ยินข่าวดีก็แอบดีใจนิดหน่อยแต่ยังเก็บอาการไว้",
+      "rule_id": "P228",
+      "kind": "train"
+    },
+    {
+      "sentence": "บ่ายนี้แอบง่วงนอนเล็กน้อยเลยลงไปซื้ออเมริกาโน่เย็น",
+      "rule_id": "P228",
+      "kind": "train"
+    },
+    {
+      "sentence": "อ่านข้อความจบแล้วแอบเขินนิดหน่อยนะเนี่ย",
+      "rule_id": "P228",
+      "kind": "train"
+    },
+    {
+      "sentence": "สุดสัปดาห์นี้แอบไปพักผ่อนต่างจังหวัดเล็กน้อยพอให้หายเหนื่อย",
+      "rule_id": "P228",
+      "kind": "train"
+    },
+    {
+      "sentence": "คนที่ชอบดื่มมัทฉะมากเป็นพิเศษต้องแวะมาลองคาเฟ่ร้านนี้",
+      "rule_id": "P229",
+      "kind": "train"
+    },
+    {
+      "sentence": "บุฟเฟต์ร้านนี้คุ้มมากสำหรับกลุ่มคนรักเนื้อย่างพรีเมียม",
+      "rule_id": "P229",
+      "kind": "train"
+    },
+    {
+      "sentence": "แอปจดบันทึกตัวใหม่เหมาะกับคนที่ชอบจัดระเบียบตารางชีวิตมาก",
+      "rule_id": "P229",
+      "kind": "train"
+    },
+    {
+      "sentence": "โรงแรมนี้เงียบสงบถูกใจคนที่ชอบการพักผ่อนแบบสโลว์ไลฟ์แน่นอน",
+      "rule_id": "P229",
+      "kind": "train"
+    },
+    {
+      "sentence": "เลนส์กล้องตัวนี้ตอบโจทย์กลุ่มคนรักการถ่ายภาพพอร์ตเทรตสุด ๆ",
+      "rule_id": "P229",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมนูใหม่เผ็ดจัดจ้านเอาใจคนที่ชอบอาหารรสแซ่บโดยเฉพาะ",
+      "rule_id": "P229",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจ้าแมวอ้วนตัวกลมที่ชอบมานอนตักทุกเย็นน่ารักน่าเอ็นดูจริง ๆ",
+      "rule_id": "P230",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจ้ารอยยิ้มสดใสที่คอยเติมพลังให้ทุกวันน่าเอ็นดูที่สุด",
+      "rule_id": "P230",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจ้าเด็กแก้มยุ้ยคนนี้เวลายิ้มแล้วน่ารักน่าเอ็นดูมาก",
+      "rule_id": "P230",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจ้าหมาขี้อ้อนมารอรับหน้าประตูบ้านทุกวันเลย",
+      "rule_id": "P230",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจ้าความสุขก้อนเล็ก ๆ ของฉันในวันที่ทำงานเหนื่อยล้า",
+      "rule_id": "P230",
+      "kind": "train"
+    },
+    {
+      "sentence": "เจ้าคนขี้เซาปลุกตั้งนานแล้วยังไม่ยอมตื่นอีก",
+      "rule_id": "P230",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้มีตารางประชุมต่อเนื่องไม่หยุดตั้งแต่เก้าโมงเช้าถึงห้าโมงเย็น",
+      "rule_id": "P231",
+      "kind": "train"
+    },
+    {
+      "sentence": "เพื่อนส่งสติกเกอร์ไลน์มาติด ๆ กันหลายครั้งจนเครื่องสั่นไม่หยุด",
+      "rule_id": "P231",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงเทศกาลร้านค้าจัดโปรโมชันลดราคาต่อเนื่องไม่หยุดเลย",
+      "rule_id": "P231",
+      "kind": "train"
+    },
+    {
+      "sentence": "กดชัตเตอร์ถ่ายรูปติด ๆ กันหลายครั้งเผื่อได้รูปที่ไม่หลับตา",
+      "rule_id": "P231",
+      "kind": "train"
+    },
+    {
+      "sentence": "ช่วงนี้มีงานด่วนแทรกเข้ามาต่อเนื่องไม่หยุดทุกวันเลย",
+      "rule_id": "P231",
+      "kind": "train"
+    },
+    {
+      "sentence": "พอกดโพสต์ปุ๊บเพื่อนก็มากดไลก์ให้ติด ๆ กันหลายครั้งทันที",
+      "rule_id": "P231",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันหยุดนี้แวะไปเดินเล่นถ่ายรูปเบา ๆ พอหอมปากหอมคอที่คาเฟ่แถวบ้าน",
+      "rule_id": "P232",
+      "kind": "train"
+    },
+    {
+      "sentence": "สั่งขนมหวานมากินแก้หิวเบา ๆ พอประมาณก่อนมื้อเย็น",
+      "rule_id": "P232",
+      "kind": "train"
+    },
+    {
+      "sentence": "เย็นนี้นัดเพื่อนจิบเครื่องดื่มพูดคุยกันเบา ๆ พอหอมปากหอมคอ",
+      "rule_id": "P232",
+      "kind": "train"
+    },
+    {
+      "sentence": "ซื้อของขวัญชิ้นเล็ก ๆ มาฝากเพื่อนพอเป็นพิธีแบบน่ารัก ๆ",
+      "rule_id": "P232",
+      "kind": "train"
+    },
+    {
+      "sentence": "ทบทวนบทเรียนล่วงหน้าเบา ๆ พอให้จำหัวข้อสำคัญได้",
+      "rule_id": "P232",
+      "kind": "train"
+    },
+    {
+      "sentence": "ลงคลิปสั้นอวดบรรยากาศทริปเที่ยวแบบพอหอมปากหอมคอ",
+      "rule_id": "P232",
+      "kind": "train"
+    },
+    {
+      "sentence": "เสื้อเชิ้ตตัวนี้เป็นสีแดงสดที่ชัดเจนโดดเด่นจนมองเห็นแต่ไกล",
+      "rule_id": "P233",
+      "kind": "train"
+    },
+    {
+      "sentence": "เมนูชาเขียวร้านนี้เข้มข้นชัดเจนสุด ๆ จนคนรักมัทฉะต้องชอบ",
+      "rule_id": "P233",
+      "kind": "train"
+    },
+    {
+      "sentence": "วันนี้แต่งตัวสไตล์วินเทจแบบจัดเต็มชัดเจนจนใครเห็นก็ดูออกทันที",
+      "rule_id": "P233",
+      "kind": "train"
+    },
+    {
+      "sentence": "แสดงออกว่าหึงหวงแบบชัดเจนสุด ๆ โดยไม่ต้องถามเลย",
+      "rule_id": "P233",
+      "kind": "train"
+    },
+    {
+      "sentence": "รสชาติต้มยำหม้อนี้เผ็ดเปรี้ยวจัดจ้านแบบชัดเจนมาก",
+      "rule_id": "P233",
+      "kind": "train"
+    },
+    {
+      "sentence": "กระเป๋าใบนี้ติดโลโก้แบรนด์ขนาดใหญ่เด่นชัดสุด ๆ",
+      "rule_id": "P233",
+      "kind": "train"
+    },
+    {
+      "sentence": "พูดทุกวันว่าจะเข้านอนตั้งแต่สี่ทุ่มแต่ตีสองแล้วยังไถมือถืออยู่เลยเมื่อไหร่จะนอนจริง",
+      "rule_id": "P234",
+      "kind": "train"
+    },
+    {
+      "sentence": "บอกว่าจะเริ่มลดน้ำหนักตั้งแต่วันจันทร์แต่สั่งชานมไข่มุกทุกวันเมื่อไหร่จะเริ่มจริง",
+      "rule_id": "P234",
+      "kind": "train"
+    },
+    {
+      "sentence": "สัญญาว่าจะปั่นงานให้เสร็จตั้งแต่มะรืนแต่ตอนนี้ยังไม่เปิดไฟล์เลย",
+      "rule_id": "P234",
+      "kind": "train"
+    },
+    {
+      "sentence": "บอกว่าจะประหยัดเงินเดือนนี้แต่เห็นกดสั่งของออนไลน์ทุกวันเลยนะ",
+      "rule_id": "P234",
+      "kind": "train"
+    },
+    {
+      "sentence": "พูดว่าจะตื่นมาอ่านหนังสือตอนเช้าแต่เที่ยงแล้วยังไม่ลุกจากเตียง",
+      "rule_id": "P234",
+      "kind": "train"
+    },
+    {
+      "sentence": "บอกว่าจะตัดใจเลิกทักไปหาเขาแต่เขาทักมาคำเดียวก็ตอบกลับทันที",
+      "rule_id": "P234",
+      "kind": "train"
     }
   ],
   "contrast": [
@@ -6934,6 +10364,21 @@
     },
     {
       "sentence": "กรุณาตรวจสอบเอกสารให้ครบถ้วนนะครับ",
+      "rule_id": "P004",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "บอกกี่ครั้งแล้วว่าอย่าทำแบบนี้นะ",
+      "rule_id": "P004",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ระวังไฟดูดนะอย่าไปจับ",
+      "rule_id": "P004",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คำว่าชนะอยู่ในประโยคนี้ไม่ใช่คำลงท้าย",
       "rule_id": "P004",
       "kind": "contrast"
     },
@@ -7004,6 +10449,16 @@
     },
     {
       "sentence": "หลังจากรวบรวมเอกสารครบแล้วให้ส่งฝ่ายทะเบียน",
+      "rule_id": "P010",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เรื่องนี้แล้วแต่เธอเลยว่าจะเลือกอันไหน",
+      "rule_id": "P010",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แล้วพรุ่งนี้ตกลงจะไปเจอกันกี่โมง",
       "rule_id": "P010",
       "kind": "contrast"
     },
@@ -7393,6 +10848,11 @@
       "kind": "contrast"
     },
     {
+      "sentence": "ขอความกรุณาอย่าส่งเสียงดังในห้องสมุด",
+      "rule_id": "P040",
+      "kind": "contrast"
+    },
+    {
       "sentence": "เธอ เป็นสรรพนามมาตรฐานในงานเขียน",
       "rule_id": "P041",
       "kind": "contrast"
@@ -7579,6 +11039,21 @@
     },
     {
       "sentence": "คำว่า เค้า ในความหมายโครงร่าง เช่น เค้าโครง ไม่ใช่สรรพนาม",
+      "rule_id": "P056",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สุดสัปดาห์นี้พวกเราจะไปเที่ยวเขาใหญ่กัน",
+      "rule_id": "P056",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กวางตัวนี้มีเขาสวยงามมาก",
+      "rule_id": "P056",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พระสงฆ์กำลังฉันภัตตาหารเช้า",
       "rule_id": "P056",
       "kind": "contrast"
     },
@@ -8253,12 +11728,27 @@
       "kind": "contrast"
     },
     {
-      "sentence": "0",
+      "sentence": "สภาพร่างกายของผู้ป่วยโดยรวมถือว่าโอเคตามลำดับ",
+      "rule_id": "P108",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผลการตรวจสอบคุณภาพสินค้าอยู่ในเกณฑ์โอเค",
       "rule_id": "P108",
       "kind": "contrast"
     },
     {
       "sentence": "วันนี้ไปคนเดียว",
+      "rule_id": "P109",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ช่วงนี้อากาศเดี๋ยวร้อนเดี๋ยวหนาว",
+      "rule_id": "P109",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อารมณ์เขาเดี๋ยวดีเดี๋ยวร้ายตามไม่ทัน",
       "rule_id": "P109",
       "kind": "contrast"
     },
@@ -8273,27 +11763,52 @@
       "kind": "contrast"
     },
     {
-      "sentence": "0",
+      "sentence": "ตรวจสอบดูแล้วเครื่องยนต์ไม่เป็นไรยังใช้งานต่อได้",
       "rule_id": "P112",
       "kind": "contrast"
     },
     {
-      "sentence": "0",
+      "sentence": "อาการบาดเจ็บไม่เป็นไรมากพักฟื้นสองวันก็หาย",
+      "rule_id": "P112",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ความขี้เกียจเป็นอุปสรรคสำคัญในการพัฒนาตัวเอง",
       "rule_id": "P113",
       "kind": "contrast"
     },
     {
-      "sentence": "0",
+      "sentence": "บทความวิเคราะห์สาเหตุของความขี้เกียจในการทำงาน",
+      "rule_id": "P113",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กำหนดการส่งมอบงานอย่างเป็นทางการคือวันพรุ่งนี้",
       "rule_id": "P114",
       "kind": "contrast"
     },
     {
-      "sentence": "0",
+      "sentence": "ไม่มีใครรู้อนาคตว่าวันพรุ่งนี้จะเกิดอะไรขึ้น",
+      "rule_id": "P114",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เมื่อคิดถึงผลกระทบระยะยาวแล้วไม่ควรลงทุนเพิ่ม",
       "rule_id": "P115",
       "kind": "contrast"
     },
     {
-      "sentence": "0",
+      "sentence": "การตัดสินใจครั้งนี้ต้องคิดถึงงบประมาณของแผนกด้วย",
+      "rule_id": "P115",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ฝ่ายการเงินกำลังตรวจสอบระบบ account ของบริษัท",
+      "rule_id": "P116",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พนักงานบัญชีเปิดใช้บริการ bank account สำหรับนิติบุคคล",
       "rule_id": "P116",
       "kind": "contrast"
     },
@@ -8469,6 +11984,21 @@
     },
     {
       "sentence": "ค่านี้คำนวณจากข้อมูลด้านบน",
+      "rule_id": "P131",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "วันนี้จะไปทานข้าวที่ไหนคะ",
+      "rule_id": "P131",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รายการนี้ถูกต้องใช่ไหมคะ",
+      "rule_id": "P131",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สะดวกคุยโทรศัพท์ตอนนี้หรือเปล่าคะ",
       "rule_id": "P131",
       "kind": "contrast"
     },
@@ -8730,6 +12260,836 @@
     {
       "sentence": "นักท่องเที่ยวลงจากรถทัวร์",
       "rule_id": "P154",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คุณลูกค้าสามารถแจ้งเลขพัสดุได้เลยครับ",
+      "rule_id": "P155",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เรียนคุณผู้จัดการเพื่อโปรดพิจารณาอนุมัติ",
+      "rule_id": "P155",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คุณครูสั่งการบ้านวิชาคณิตศาสตร์ไว้สองหน้า",
+      "rule_id": "P155",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สวัสดีครับอาจารย์ คุณมีเวลาว่างช่วงบ่ายไหมครับ",
+      "rule_id": "P156",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ขอเรียนเชิญคุณลูกค้าทดลองสินค้าด้านในครับ",
+      "rule_id": "P156",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ตัวย่อ พ.ศ. หมายถึงพุทธศักราช",
+      "rule_id": "P157",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เอกสารระบุปี พ.ศ. เกิดของผู้สมัครอย่างชัดเจน",
+      "rule_id": "P157",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คำนำหน้าชื่อ น.ส. ย่อมาจากนางสาวในเอกสารราชการ",
+      "rule_id": "P158",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณากรอกคำนำหน้าชื่อ น.ส. หรือ นาง ในแบบฟอร์ม",
+      "rule_id": "P158",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "จะเลือกเดินทางด้วยรถไฟหรือเครื่องบิน",
+      "rule_id": "P159",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้สมัครต้องแนบสำเนาบัตรประชาชนหรือพาสปอร์ต",
+      "rule_id": "P159",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คำตอบข้อนี้ใช่หรือไม่ใช่ให้กากบาทลงในช่อง",
+      "rule_id": "P160",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาเป็นคนที่ใช่สำหรับตำแหน่งนี้",
+      "rule_id": "P160",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาสอบได้คะแนนเต็มสิบ",
+      "rule_id": "P161",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "บริษัทก่อตั้งมาครบสิบปีแล้ว",
+      "rule_id": "P161",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาตอบแบบสอบถามว่าท่านเห็นด้วยหรือไม่เห็นด้วย",
+      "rule_id": "P162",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คณะกรรมการมีมติเห็นชอบตามที่เสนอ",
+      "rule_id": "P162",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "จังหวัดเลยมีอากาศหนาวเย็นในช่วงปลายปี",
+      "rule_id": "P163",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาเดินเลยป้ายรถเมล์ไปไกลมาก",
+      "rule_id": "P163",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อย่าปล่อยให้เวลาเลยผ่านไปโดยเปล่าประโยชน์",
+      "rule_id": "P163",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เอกสารฉบับจริงถูกเก็บรักษาไว้ที่ฝ่ายบุคคล",
+      "rule_id": "P164",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาแนบสำเนาคู่กับบัตรประชาชนตัวจริง",
+      "rule_id": "P164",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รายงานฉบับนี้ศึกษาว่าปัจจัยทางเศรษฐกิจส่งผลต่อผู้บริโภคอย่างไร",
+      "rule_id": "P165",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ไม่ว่าจะเกิดอะไรขึ้นอย่างไรเสียเราก็ต้องทำตามสัญญา",
+      "rule_id": "P165",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ถือไมโครโฟนให้ห่างจากปากเล็กน้อยเวลาพูด",
+      "rule_id": "P166",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ระยะทางหนึ่งไมล์มีค่าประมาณหนึ่งจุดหกกิโลเมตร",
+      "rule_id": "P166",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ไม่ว่าจะพยายามเท่าไรก็ยังไม่สำเร็จ",
+      "rule_id": "P167",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขามีเงินเก็บไม่มากเท่าไหร่",
+      "rule_id": "P167",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ฝาแฝดคู่นี้มีใบหน้าที่เหมือนกันมากตามพันธุกรรม",
+      "rule_id": "P168",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สินค้าสองรุ่นนี้มีสเปกทางเทคนิคเหมือนกันทุกประการ",
+      "rule_id": "P168",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ความผิดพลาดเพียงเล็กน้อยอาจส่งผลต่อโครงสร้างอาคาร",
+      "rule_id": "P169",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อัตราดอกเบี้ยปรับตัวลดลงเล็กน้อยในไตรมาสที่สาม",
+      "rule_id": "P169",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ร้านสะดวกซื้อแห่งนี้เปิดให้บริการตลอดยี่สิบสี่ชั่วโมง",
+      "rule_id": "P170",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ถนนสายนี้มีไฟส่องสว่างตลอดแนวทางเดิน",
+      "rule_id": "P170",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาลงนามรับรองสำเนาถูกต้องในเอกสารฉบับนี้",
+      "rule_id": "P171",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รายงานนี้จัดทำขึ้นเพื่อสรุปผลการดำเนินงานประจำปี",
+      "rule_id": "P171",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แสงแดดตอนเที่ยงสว่างจ้าจนแสบตา",
+      "rule_id": "P172",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เด็กน้อยร้องไห้จ้าเมื่อทำของเล่นหลุดมือ",
+      "rule_id": "P172",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาเป็นคนเข้าใจความรู้สึกของผู้อื่นเสมอ",
+      "rule_id": "P173",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ทั้งสองฝ่ายปรับความเข้าใจกันได้เรียบร้อยแล้ว",
+      "rule_id": "P173",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยเสียชีวิตอย่างสงบที่โรงพยาบาล",
+      "rule_id": "P174",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าหน้าที่กู้ภัยเข้าช่วยเหลือผู้ประสบภัยอย่างเร่งด่วน",
+      "rule_id": "P174",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยมีอาการปวดศีรษะร่วมกับมีไข้สูง",
+      "rule_id": "P175",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ทานยาแก้ปวดเพื่อบรรเทาอาการไมเกรน",
+      "rule_id": "P175",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผลการประเมินคุณภาพอยู่ในระดับดีมากตามเกณฑ์",
+      "rule_id": "P176",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อัตราการเติบโตของบริษัทอยู่ในเกณฑ์ดีมาก",
+      "rule_id": "P176",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อาคารเก่าพังทลายลงมาหลังเกิดแผ่นดินไหว",
+      "rule_id": "P177",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าหน้าที่กำลังซ่อมแซมสะพานที่ชำรุดเสียหาย",
+      "rule_id": "P177",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สายไฟชำรุดทำให้เกิดไฟฟ้าช็อตบริเวณปลั๊กพ่วง",
+      "rule_id": "P178",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักกีฬาฟุตบอลยิงลูกช็อตสำคัญเข้าประตู",
+      "rule_id": "P178",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แม่ค้ากำลังดองมะม่วงและผลไม้ตามฤดูกาลในโหลแก้ว",
+      "rule_id": "P179",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "การดองเค็มเป็นวิธีถนอมอาหารแบบดั้งเดิม",
+      "rule_id": "P179",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ขบวนรถค่อย ๆ เคลื่อนตัวไปข้างหน้าตามสัญญาณจราจร",
+      "rule_id": "P180",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พนักงานย้ายโต๊ะทำงานไปยังแผนกใหม่",
+      "rule_id": "P180",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณากดปุ่มชัตดาวน์คอมพิวเตอร์ทุกครั้งหลังเลิกใช้งาน",
+      "rule_id": "P181",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "โรงงานประกาศปิดเดินเครื่องจักรเพื่อซ่อมบำรุงประจำปี",
+      "rule_id": "P181",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ฝนตกหนักติดต่อกันทำให้เกิดน้ำท่วมขังบนผิวจราจร",
+      "rule_id": "P182",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แพทย์หยดน้ำตาเทียมเพื่อลดอาการตาแห้ง",
+      "rule_id": "P182",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยเข้ารับการเอกซเรย์ปอดประจำปีที่โรงพยาบาล",
+      "rule_id": "P183",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "การออกกำลังกายแบบคาร์ดิโอช่วยบริหารปอดและหัวใจ",
+      "rule_id": "P183",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักวิจัยกำลังคิดวิเคราะห์ข้อมูลทางสถิติอย่างละเอียด",
+      "rule_id": "P184",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คณะทำงานร่วมกันระดมความคิดเพื่อหาแนวทางแก้ไขปัญหา",
+      "rule_id": "P184",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าหน้าที่ดับเพลิงควบคุมไฟที่กำลังลุกไหม้ได้อย่างรวดเร็ว",
+      "rule_id": "P185",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เปลวไฟจากเทียนไขดับลงเมื่อถูกลมพัด",
+      "rule_id": "P185",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แม่ค้ากำลังตำส้มตำครกใหญ่อยู่หน้าร้าน",
+      "rule_id": "P186",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เดินชนขอบโต๊ะจนหัวเข่าช้ำ",
+      "rule_id": "P186",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ตำรวจตั้งด่านตรวจความเรียบร้อยบนท้องถนน",
+      "rule_id": "P186",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ต้มน้ำให้เดือดก่อนใส่เส้นบะหมี่ลงไป",
+      "rule_id": "P187",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เมนูข้าวต้มปลาร้านนี้หอมอร่อยมาก",
+      "rule_id": "P187",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "โทรศัพท์มือถือหลุดมือตกกระแทกพื้นหน้าจอแตก",
+      "rule_id": "P188",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักท่องเที่ยวไปนั่งตกปลาที่ริมอ่างเก็บน้ำ",
+      "rule_id": "P188",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาสอบตกวิชาเคมีจึงต้องลงเรียนซ้ำ",
+      "rule_id": "P188",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ไฟฉายส่องแสงสว่างออกมาจากด้านในห้องมืด",
+      "rule_id": "P189",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อาหารมื้อนี้มีคุณค่าทางโภชนาการครบห้าหมู่",
+      "rule_id": "P189",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ห้างสรรพสินค้าจะปิดให้บริการในเวลาสี่ทุ่มตรง",
+      "rule_id": "P190",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาปิดประตูและหน้าต่างให้สนิทก่อนออกจากห้อง",
+      "rule_id": "P190",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ไส้ดินสอกดขนาดศูนย์จุดห้ามิลลิเมตรหักง่าย",
+      "rule_id": "P191",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แพทย์ตรวจพบอาการลำไส้อักเสบเฉียบพลัน",
+      "rule_id": "P191",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เด็กเล็กเดินเกาะขอบโต๊ะเพื่อฝึกทรงตัว",
+      "rule_id": "P192",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ช่างติดตั้งขอบหน้าต่างอะลูมิเนียมใหม่",
+      "rule_id": "P192",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พนักงานเสิร์ฟกำลังนำอาหารมาวางที่โต๊ะลูกค้า",
+      "rule_id": "P193",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักเทนนิสเสิร์ฟลูกแรกด้วยความเร็วสูง",
+      "rule_id": "P193",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ใช้กาวติดกระดาษเข้ากับบอร์ดนิทรรศการ",
+      "rule_id": "P194",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รถยนต์ติดหล่มโคลนหลังฝนตกหนัก",
+      "rule_id": "P194",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สุนัขข้างบ้านเห่าเสียงดังโฮ่งเมื่อเห็นคนแปลกหน้า",
+      "rule_id": "P195",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าของพาสุนัขไปฉีดวัคซีนที่คลินิก",
+      "rule_id": "P195",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผลไม้สุกงอมจนมีน้ำหวานชุ่มฉ่ำภายในเนื้อ",
+      "rule_id": "P196",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พื้นดินชุ่มน้ำหลังการรดน้ำต้นไม้",
+      "rule_id": "P196",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขากระโดดข้ามสิ่งกีดขวางในการฝึกซ้อมกีฬา",
+      "rule_id": "P197",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เพลงฮิปฮอปได้รับความนิยมในกลุ่มคนรุ่นใหม่",
+      "rule_id": "P197",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ทันตแพทย์แนะนำให้จัดฟันเพื่อแก้ไขปัญหาฟันยื่น",
+      "rule_id": "P198",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เด็กกำลังเปลี่ยนฟันน้ำนมเป็นฟันแท้",
+      "rule_id": "P198",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พรานป่าออกล่าสัตว์ในเขตหวงห้ามซึ่งผิดกฎหมาย",
+      "rule_id": "P199",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยจิตเวชได้รับการดูแลจากแพทย์ผู้เชี่ยวชาญ",
+      "rule_id": "P199",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักโภชนาการจัดตารางอาหารแต่ละมื้อให้ครบห้าหมู่",
+      "rule_id": "P200",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยต้องรับประทานยาหลังอาหารแต่ละมื้อตามแพทย์สั่ง",
+      "rule_id": "P200",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เครื่องบินกำลังลดระดับเพดานบินเพื่อแลนด์ลงสู่สนามบินสุวรรณภูมิ",
+      "rule_id": "P201",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กัปตันประกาศให้ผู้โดยสารรัดเข็มขัดก่อนเครื่องลงจอด",
+      "rule_id": "P201",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สำนักงานเขตเปิดให้บริการทำบัตรประชาชนในวันเสาร์",
+      "rule_id": "P202",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กระทรวงศึกษาธิการประกาศปรับปรุงหลักสูตรแกนกลาง",
+      "rule_id": "P202",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "หยิบของชิ้นนั้นบนโต๊ะส่งให้หน่อย",
+      "rule_id": "P203",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยมีอาการไอเรื้อรังติดต่อกันหลายสัปดาห์",
+      "rule_id": "P203",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "จุดประชาสัมพันธ์ของห้างสรรพสินค้าตั้งอยู่ที่ชั้น G",
+      "rule_id": "P204",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ลิฟต์โดยสารกำลังลงไปยังลานจอดรถชั้นใต้ดิน",
+      "rule_id": "P204",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักกีฬาคนนี้เป็นคนไทยคนแรกที่คว้าเหรียญทองในรายการระดับโลก",
+      "rule_id": "P205",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ประวัติศาสตร์บันทึกชื่อคนไทยคนแรกที่เดินทางไปศึกษาต่อต่างประเทศ",
+      "rule_id": "P205",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "แพทย์ผิวหนังแนะนำวิธีเลือกใช้เซรั่มบำรุงผิวหน้าให้เหมาะกับสภาพผิว",
+      "rule_id": "P206",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ทาเซรั่มวิตามินซีเป็นประจำทุกเช้าก่อนทากันแดด",
+      "rule_id": "P206",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "การศึกษาประวัติศาสตร์ศาสนาและพิธีกรรมโบราณในเอเชียตะวันออกเฉียงใต้",
+      "rule_id": "P207",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักมานุษยวิทยาวิเคราะห์ระบบความเชื่อของชุมชนดั้งเดิม",
+      "rule_id": "P207",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้สมัครงานมีพี่น้องร่วมบิดามารดาจำนวนสองคน",
+      "rule_id": "P208",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รุ่นพี่กำลังปฐมนิเทศชี้แจงกฎระเบียบให้น้องนักศึกษาปีหนึ่ง",
+      "rule_id": "P208",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กระทรวงการต่างประเทศออกแถลงการณ์เกี่ยวกับความร่วมมือระหว่างภูมิภาค",
+      "rule_id": "P209",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นโยบายการค้าระหว่างประเทศส่งผลต่อดุลการค้า",
+      "rule_id": "P209",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "สำนักงานคณะกรรมการอาหารและยาตรวจสอบมาตรฐานการผลิตเครื่องสำอาง",
+      "rule_id": "P210",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "อุตสาหกรรมเคมีภัณฑ์และเวชสำอางเติบโตต่อเนื่อง",
+      "rule_id": "P210",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาสรุปไทม์ไลน์แผนการดำเนินงานของโครงการทั้งสี่ไตรมาส",
+      "rule_id": "P211",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พนักงานสอบสวนลำดับไทม์ไลน์ของเหตุการณ์จากกล้องวงจรปิด",
+      "rule_id": "P211",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ติดตามคณะรัฐมนตรีเดินทางถึงสถานที่จัดการประชุม",
+      "rule_id": "P212",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าหน้าที่รักษาความปลอดภัยคอยดูแลผู้ติดตามอย่างใกล้ชิด",
+      "rule_id": "P212",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "หนังสือราชการฉบับนี้เป็นเอกสารทางการของหน่วยงานรัฐ",
+      "rule_id": "P213",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พิธีลงนามบันทึกข้อตกลงจัดขึ้นอย่างเป็นทางการ ณ ทำเนียบรัฐบาล",
+      "rule_id": "P213",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้โดยสารเกิดอาการตกใจเมื่อได้ยินเสียงสัญญาณเตือนภัย",
+      "rule_id": "P214",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรมอุตุนิยมวิทยาประกาศเตือนภัยพายุฤดูร้อน",
+      "rule_id": "P214",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ระบบประสาทส่วนกลางทำหน้าที่ควบคุมการทำงานของร่างกาย",
+      "rule_id": "P215",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ผู้ป่วยเข้ารับการตรวจรักษากับแพทย์เฉพาะทางด้านระบบประสาท",
+      "rule_id": "P215",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ความเสียหายจากอุทกภัยครั้งนี้ประเมินมูลค่าหลายล้านบาท",
+      "rule_id": "P216",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "บริษัททำประกันภัยเพื่อคุ้มครองความเสียหายของทรัพย์สิน",
+      "rule_id": "P216",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "คุณต้องการสอบถามข้อมูลเกี่ยวกับเรื่องอะไรครับ",
+      "rule_id": "P217",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาระบุว่าอะไรคือสาเหตุหลักของปัญหาในรายงาน",
+      "rule_id": "P217",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พยาบาลวิชาชีพใช้ตัวย่อ RN ในเอกสารทางการแพทย์",
+      "rule_id": "P218",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ตอนนี้ของหนังสือเล่มนี้กล่าวถึงประวัติศาสตร์ยุคกลาง",
+      "rule_id": "P218",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รายงานฉบับนี้มีข้อมูลรายละเอียดครบถ้วนสมบูรณ์ตามที่คณะกรรมการต้องการ",
+      "rule_id": "P219",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "การเปิดเผยข้อมูลส่วนบุคคลต้องได้รับความยินยอมตามกฎหมาย PDPA",
+      "rule_id": "P219",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาเดินทางไปต่างประเทศเมื่อสัปดาห์ที่แล้ว",
+      "rule_id": "P220",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "โครงการนี้ต้องไปต่อตามแผนยุทธศาสตร์ที่วางไว้",
+      "rule_id": "P220",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "หน้าจอโทรศัพท์มือถือรุ่นใหม่รองรับอัตรารีเฟรชสูง",
+      "rule_id": "P221",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พนักงานทำความสะอาดกระจกหน้าต่างของอาคาร",
+      "rule_id": "P221",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "การประชุมประจำสัปดาห์จัดขึ้นทุกวันศุกร์เวลาเก้านาฬิกา",
+      "rule_id": "P222",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ธนาคารเปิดทำการวันจันทร์ถึงวันศุกร์",
+      "rule_id": "P222",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กำหนดการยื่นซองประมูลอย่างเป็นทางการคือวันพรุ่งนี้",
+      "rule_id": "P223",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ไม่มีใครล่วงรู้เหตุการณ์ที่จะเกิดขึ้นในวันพรุ่งนี้",
+      "rule_id": "P223",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ขอขอบพระคุณท่านประธานในพิธีเป็นอย่างสูง",
+      "rule_id": "P224",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "จดหมายฉบับนี้เขียนขึ้นเพื่อแสดงความขอบคุณอย่างเป็นทางการ",
+      "rule_id": "P224",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "บ้านพักของเขาตั้งอยู่ใกล้ฉันเพียงสองซอย",
+      "rule_id": "P225",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "โรงพยาบาลขนาดใหญ่ตั้งอยู่ใกล้พื้นที่ชุมชน",
+      "rule_id": "P225",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กิ่งไม้ชนิดนี้มีความเหนียวและยืดหยุ่นสูงจึงไม่หักง่าย",
+      "rule_id": "P226",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "บริษัทจ่ายเงินเดือนเต็มจำนวนโดยไม่หักค่าธรรมเนียมโอน",
+      "rule_id": "P226",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขื่อนกั้นน้ำสามารถต้านทานแรงดันน้ำหลากได้ตามมาตรฐานวิศวกรรม",
+      "rule_id": "P227",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ร่างกายสร้างภูมิคุ้มกันเพื่อต้านทานเชื้อโรค",
+      "rule_id": "P227",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "กรุณาเดินและปิดประตูเบา ๆ เพื่อไม่ให้รบกวนผู้ป่วย",
+      "rule_id": "P228",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ลมพัดเบา ๆ ในช่วงเช้าตรู่",
+      "rule_id": "P228",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ช่างเทคนิคกำลังเดินสายไฟและสายสัญญาณอินเทอร์เน็ต",
+      "rule_id": "P229",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "วันนี้เขาตื่นสายเพราะลืมตั้งนาฬิกาปลุก",
+      "rule_id": "P229",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รถเมล์สายแปดวิ่งผ่านอนุสาวรีย์ชัยสมรภูมิ",
+      "rule_id": "P229",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าหน้าที่ตำรวจปฏิบัติหน้าที่ดูแลความสงบเรียบร้อย",
+      "rule_id": "P230",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เจ้าของกิจการลงนามในสัญญาเช่าพื้นที่",
+      "rule_id": "P230",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "นักดนตรีตีกลองรัวตามจังหวะเพลงมาร์ช",
+      "rule_id": "P231",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เสียงเคาะประตูดังรัวในยามวิกาล",
+      "rule_id": "P231",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "หมูกรอบร้านนี้ทอดจนหนังกรอบเคี้ยวดังกรุบ",
+      "rule_id": "P232",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ขนมขบเคี้ยวมีเนื้อสัมผัสกรุบกรอบ",
+      "rule_id": "P232",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "เขาตะโกนเรียกเพื่อนที่เดินอยู่อีกฝั่งของถนน",
+      "rule_id": "P233",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ห้ามส่งเสียงตะโกนโหวกเหวกในเขตโรงพยาบาล",
+      "rule_id": "P233",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "ขณะนี้เวลาบ่ายสองโมงครึ่งตามเวลามาตรฐาน",
+      "rule_id": "P234",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "พรุ่งนี้เรามีนัดประชุมกันตอนกี่โมงครับ",
+      "rule_id": "P234",
+      "kind": "contrast"
+    },
+    {
+      "sentence": "รถไฟขบวนถัดไปจะออกจากชานชาลากี่โมง",
+      "rule_id": "P234",
       "kind": "contrast"
     }
   ]
